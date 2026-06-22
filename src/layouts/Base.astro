@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+import { withBase } from '../utils/url';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.name, description = site.seoDescription } = Astro.props;
+const fullTitle = title === site.name ? `${site.name} — ${site.tagline}` : `${title} — ${site.name}`;
+// Astro.site + base-aware URL for OG tags / canonical.
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="theme-color" content="#08090c" />
+    <link rel="icon" href={withBase('favicon.svg')} type="image/svg+xml" />
+
+    <!-- Fonts: Inter (sans) + JetBrains Mono (mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Scroll-reveal: progressively enhance .reveal elements. -->
+    <script>
+      const els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || els.length === 0) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+  </body>
+</html>

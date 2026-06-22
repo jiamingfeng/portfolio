@@ -1,0 +1,186 @@
+---
+import { skills, timeline } from '../data/site';
+
+// Group skill bars; level → fill width.
+const levelWidth: Record<string, string> = {
+  expert: '100%',
+  advanced: '80%',
+  proficient: '62%',
+};
+---
+
+<section class="section about" id="about">
+  <div class="container">
+    <p class="eyebrow reveal">About</p>
+    <h2 class="section-title reveal">Two decades across games, VFX, and real-time graphics</h2>
+
+    <div class="about-grid">
+      <!-- Career timeline -->
+      <div class="timeline reveal">
+        {timeline.map((job) => (
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-content">
+              <div class="tl-top">
+                <h3 class="tl-role">{job.role}</h3>
+                <span class="tl-period">{job.period}</span>
+              </div>
+              <p class="tl-company">{job.company} · {job.location}</p>
+              <ul class="tl-points">
+                {job.points.map((p) => <li>{p}</li>)}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Skills -->
+      <aside class="skills reveal">
+        <h3 class="skills-title">Technical skills</h3>
+        <ul class="skill-list">
+          {skills.map((s) => (
+            <li class="skill">
+              <div class="skill-row">
+                <span class="skill-name">{s.name}</span>
+                <span class="skill-level">{s.level}</span>
+              </div>
+              <div class="skill-bar">
+                <span class="skill-fill" style={`width:${levelWidth[s.level]}`}></span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    margin-top: 3rem;
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+  .tl-item {
+    position: relative;
+    padding-left: 2rem;
+    padding-bottom: 2.2rem;
+    border-left: 1px solid var(--border);
+  }
+  .tl-item:last-child {
+    padding-bottom: 0;
+  }
+  .tl-dot {
+    position: absolute;
+    left: -6px;
+    top: 6px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--bg), 0 0 14px var(--accent);
+  }
+  .tl-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.6rem 1rem;
+    justify-content: space-between;
+  }
+  .tl-role {
+    font-size: 1.15rem;
+  }
+  .tl-period {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-faint);
+  }
+  .tl-company {
+    color: var(--accent);
+    font-size: 0.92rem;
+    margin-top: 0.15rem;
+  }
+  .tl-points {
+    list-style: none;
+    margin-top: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .tl-points li {
+    position: relative;
+    padding-left: 1.1rem;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+  }
+  .tl-points li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--text-faint);
+  }
+
+  .skills {
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+  }
+  .skills-title {
+    font-size: 1.05rem;
+    margin-bottom: 1.4rem;
+  }
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  .skill-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.45rem;
+  }
+  .skill-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .skill-level {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+  }
+  .skill-bar {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .skill-fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent-deep), var(--accent));
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+    .skills {
+      position: static;
+    }
+  }
+</style>

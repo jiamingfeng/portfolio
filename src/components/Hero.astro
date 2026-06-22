@@ -1,0 +1,213 @@
+---
+import { site, contact } from '../data/site';
+import { projects } from '../data/projects';
+import { withBase } from '../utils/url';
+
+// Marquee of shipped titles, sourced from project data.
+const titles = projects.map((p) => p.title.split(' — ')[0]);
+---
+
+<section class="hero" id="top">
+  <div class="container hero-inner">
+    <p class="eyebrow reveal">{site.pedigree}</p>
+
+    <h1 class="hero-name reveal">{site.name}</h1>
+    <p class="hero-tagline reveal">{site.tagline}</p>
+
+    <p class="hero-summary reveal">{site.summary}</p>
+
+    <div class="hero-actions reveal">
+      <a class="btn btn-primary" href="#work">View work</a>
+      <a class="btn btn-ghost" href={withBase(contact.resume)} download>Download résumé</a>
+    </div>
+
+    <div class="hero-meta reveal">
+      <span><span class="dot"></span>{site.location}</span>
+      <span>20+ years shipping</span>
+    </div>
+  </div>
+
+  <!-- shipped-titles marquee -->
+  <div class="marquee reveal" aria-hidden="true">
+    <div class="marquee-track">
+      {[...titles, ...titles].map((t) => <span class="marquee-item">{t}</span>)}
+    </div>
+  </div>
+
+  <a class="scroll-cue" href="#work" aria-label="Scroll to work">
+    <span></span>
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 4.25rem;
+  }
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+    justify-content: center;
+    padding-block: clamp(3rem, 8vh, 6rem);
+  }
+  .hero-name {
+    font-size: clamp(3rem, 11vw, 7.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    background: linear-gradient(180deg, #ffffff 30%, #aeb8c6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-top: 0.4rem;
+  }
+  .hero-tagline {
+    font-size: clamp(1.05rem, 2.6vw, 1.6rem);
+    color: var(--text);
+    font-weight: 600;
+    margin-top: 0.2rem;
+  }
+  .hero-summary {
+    max-width: 60ch;
+    color: var(--text-dim);
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    margin-top: 1.1rem;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-top: 2rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #04222b;
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+  .btn-primary:hover {
+    color: #04222b;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px var(--accent-glow);
+  }
+  .btn-ghost {
+    border: 1px solid var(--border-bright);
+    color: var(--text);
+  }
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2.2rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-faint);
+  }
+  .hero-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+  }
+
+  .marquee {
+    overflow: hidden;
+    border-block: 1px solid var(--border);
+    padding-block: 1rem;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 3rem;
+    width: max-content;
+    animation: scroll-x 38s linear infinite;
+  }
+  .marquee-item {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .marquee-item::before {
+    content: '◆';
+    color: var(--accent);
+    margin-right: 3rem;
+    font-size: 0.6rem;
+    vertical-align: middle;
+  }
+  @keyframes scroll-x {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--border-bright);
+    border-radius: 14px;
+    display: grid;
+    place-items: start center;
+    padding-top: 7px;
+  }
+  .scroll-cue span {
+    width: 4px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
+    animation: cue 1.6s ease-in-out infinite;
+  }
+  @keyframes cue {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 0.3;
+    }
+  }
+  @media (max-width: 720px) {
+    .scroll-cue {
+      display: none;
+    }
+  }
+</style>
