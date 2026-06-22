@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import ProjectSection from '../components/ProjectSection.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { projects } from '../data/projects';
+---
+
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+
+    <section class="section work" id="work">
+      <div class="container">
+        <p class="eyebrow reveal">Selected work</p>
+        <h2 class="section-title reveal">Projects</h2>
+      </div>
+      <div class="container projects">
+        {projects.map((project, i) => <ProjectSection project={project} index={i} />)}
+      </div>
+    </section>
+
+    <About />
+    <Contact />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .work {
+    padding-bottom: clamp(2rem, 5vw, 4rem);
+  }
+  .projects {
+    margin-top: 2.5rem;
+  }
+</style>

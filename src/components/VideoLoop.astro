@@ -1,0 +1,75 @@
+---
+// Silent autoplay loop for in-repo gameplay clips. Looks for <slug>/<src>.mp4 +
+// <src>.webm and an optional <poster>.jpg under public/assets/<slug>/.
+// Pauses when off-screen (see script) to save battery/CPU.
+import { withBase } from '../utils/url';
+
+interface Props {
+  slug: string;
+  src: string;
+  poster?: string;
+  title?: string;
+}
+const { slug, src, poster, title } = Astro.props;
+const dir = withBase(`assets/${slug}/`);
+const posterUrl = poster ? `${dir}${poster}.jpg` : undefined;
+---
+
+<figure class="loop">
+  <video
+    class="loop-video"
+    muted
+    loop
+    playsinline
+    preload="metadata"
+    poster={posterUrl}
+    aria-label={title}
+  >
+    <source src={`${dir}${src}.webm`} type="video/webm" />
+    <source src={`${dir}${src}.mp4`} type="video/mp4" />
+  </video>
+  {title && <figcaption class="loop-caption">{title}</figcaption>}
+</figure>
+
+<style>
+  .loop {
+    margin: 0;
+  }
+  .loop-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .loop-caption {
+    margin-top: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+</style>
+
+<script>
+  // Autoplay only while visible; this keeps many loops on one page cheap.
+  const vids = document.querySelectorAll<HTMLVideoElement>('.loop-video');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) {
+            v.play().catch(() => {});
+          } else {
+            v.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    vids.forEach((v) => io.observe(v));
+  } else {
+    vids.forEach((v) => v.play().catch(() => {}));
+  }
+</script>

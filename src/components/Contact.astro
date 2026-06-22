@@ -1,0 +1,114 @@
+---
+import { site, contact } from '../data/site';
+import { withBase } from '../utils/url';
+import Icon from './Icon.astro';
+---
+
+<section class="section contact" id="contact">
+  <div class="container contact-inner reveal">
+    <p class="eyebrow">Contact</p>
+    <h2 class="contact-title">Let’s build something.</h2>
+    <p class="contact-sub">
+      Open to Principal / Lead engineering roles in games, real-time graphics, and engine technology.
+    </p>
+
+    <div class="contact-actions">
+      <a class="btn btn-primary" href={`mailto:${contact.email}`}><Icon name="mail" />{contact.email}</a>
+      <a class="btn btn-ghost" href={contact.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" />LinkedIn</a>
+      <a class="btn btn-ghost" href={withBase(contact.resume)} download><Icon name="resume" />Résumé (PDF)</a>
+    </div>
+
+    <div class="credits">
+      <span class="credits-label">Credits</span>
+      <a href={contact.mobygames} target="_blank" rel="noopener noreferrer"><Icon name="mobygames" size={16} />MobyGames (games) ↗</a>
+      <a href={contact.imdb} target="_blank" rel="noopener noreferrer"><Icon name="imdb" size={15} />IMDb (film) ↗</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+  .contact-inner {
+    max-width: 60ch;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .contact-title {
+    font-size: clamp(2rem, 6vw, 3.6rem);
+    background: linear-gradient(180deg, #ffffff 35%, #aeb8c6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .contact-sub {
+    color: var(--text-dim);
+    font-size: 1.1rem;
+  }
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.85rem;
+    margin-top: 1.75rem;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.98rem;
+    transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #04222b;
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+  .btn-primary:hover {
+    color: #04222b;
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    border: 1px solid var(--border-bright);
+    color: var(--text);
+  }
+  .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .credits {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1.4rem;
+    margin-top: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+  }
+  .credits-label {
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+  }
+  .credits a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    color: var(--text-dim);
+  }
+  .credits a:hover {
+    color: var(--accent);
+  }
+</style>

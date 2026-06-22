@@ -1,0 +1,180 @@
+---
+import { site } from '../data/site';
+
+// First initial(s) for the logo mark.
+const initials = site.name
+  .split(' ')
+  .map((w) => w[0])
+  .join('');
+---
+
+<header class="nav" id="site-nav">
+  <div class="container nav-inner">
+    <a href="#top" class="logo" aria-label={`${site.name} — home`}>
+      <span class="logo-mark">{initials}</span>
+      <span class="logo-name">{site.name}</span>
+    </a>
+
+    <nav class="links" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--bg) 72%, transparent);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .nav.scrolled {
+    border-bottom-color: var(--border);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--text);
+    font-weight: 700;
+  }
+  .logo-mark {
+    display: grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 9px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--bg);
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    box-shadow: 0 0 22px var(--accent-glow);
+  }
+  .logo-name {
+    letter-spacing: -0.01em;
+  }
+  .links {
+    display: flex;
+    gap: 2rem;
+  }
+  .links a {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    font-weight: 500;
+    position: relative;
+  }
+  .links a:hover {
+    color: var(--text);
+  }
+  .links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--accent);
+    transition: width 0.22s ease;
+  }
+  .links a:hover::after {
+    width: 100%;
+  }
+
+  .menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .menu-btn span {
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+  .menu-btn[aria-expanded='true'] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .menu-btn[aria-expanded='true'] span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-btn[aria-expanded='true'] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    padding: 0.5rem var(--gutter) 1.25rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-elev);
+  }
+  .mobile-menu a {
+    color: var(--text);
+    padding: 0.85rem 0;
+    font-size: 1.05rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  @media (max-width: 720px) {
+    .links {
+      display: none;
+    }
+    .menu-btn {
+      display: flex;
+    }
+    .mobile-menu:not([hidden]) {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => nav?.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const btn = nav?.querySelector('.menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+    if (menu) menu.hidden = open;
+  });
+  // Close mobile menu after navigating.
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      btn?.setAttribute('aria-expanded', 'false');
+      if (menu) menu.hidden = true;
+    })
+  );
+</script>

@@ -1,0 +1,42 @@
+---
+import { site, contact } from '../data/site';
+const year = 2026;
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© {year} {site.name}</span>
+    <span class="footer-links">
+      <a href={`mailto:${contact.email}`}>Email</a>
+      <a href={contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="#top">Back to top ↑</a>
+    </span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border);
+    padding-block: 2rem;
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-faint);
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .footer-links a {
+    color: var(--text-dim);
+  }
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+</style>

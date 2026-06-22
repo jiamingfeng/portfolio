@@ -1,0 +1,63 @@
+---
+// Small inline icon set for contact / credit links. Monochrome (currentColor),
+// uniform 1em box so they sit inline with button text.
+// names: mail | linkedin | resume | mobygames | imdb
+interface Props {
+  name: 'mail' | 'linkedin' | 'resume' | 'mobygames' | 'imdb';
+  size?: number;
+}
+const { name, size = 18 } = Astro.props;
+---
+
+{
+  name === 'mail' && (
+    <svg class="icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m2 7 10 6 10-6" />
+    </svg>
+  )
+}
+{
+  name === 'linkedin' && (
+    <svg class="icon" width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z" />
+    </svg>
+  )
+}
+{
+  name === 'resume' && (
+    <svg class="icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+      <path d="M14 2v6h6" />
+      <path d="M9 13h6M9 17h6M9 9h1" />
+    </svg>
+  )
+}
+{
+  /* MobyGames → gamepad (line icon) */
+  name === 'mobygames' && (
+    <svg class="icon" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M6 11h4M8 9v4" />
+      <circle cx="15" cy="11.5" r="1.1" fill="currentColor" stroke="none" />
+      <circle cx="17.5" cy="13.2" r="1.1" fill="currentColor" stroke="none" />
+      <path d="M17.5 6H6.5A4.5 4.5 0 0 0 2.05 9.86l-.78 5.2A2.4 2.4 0 0 0 3.64 18a2.4 2.4 0 0 0 2.1-1.24l.74-1.3A1.8 1.8 0 0 1 8.05 14.5h7.9a1.8 1.8 0 0 1 1.57.96l.74 1.3A2.4 2.4 0 0 0 20.36 18a2.4 2.4 0 0 0 2.37-2.94l-.78-5.2A4.5 4.5 0 0 0 17.5 6z" />
+    </svg>
+  )
+}
+{
+  /* IMDb → brand badge with letters */
+  name === 'imdb' && (
+    <svg class="icon icon-imdb" width={Math.round((size * 32) / 24)} height={size} viewBox="0 0 32 24" aria-hidden="true">
+      <rect x="0.75" y="0.75" width="30.5" height="22.5" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.5" />
+      <text x="16" y="16.5" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="11" fill="currentColor">IMDb</text>
+    </svg>
+  )
+}
+
+<style>
+  .icon {
+    flex: none;
+    display: inline-block;
+    vertical-align: -0.18em;
+  }
+</style>
