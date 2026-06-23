@@ -1,0 +1,104 @@
+---
+// Hosted/external video with sound — click-to-play facade so the page stays
+// quiet on load. Unlike VideoLoop (silent, autoplay, in-repo), this points at a
+// full external URL (e.g. an EA Frostbite sizzle reel) and plays with controls.
+import { withBase } from '../utils/url';
+
+interface Props {
+  url: string; // full external video URL
+  slug: string;
+  poster?: string; // optional local poster: assets/<slug>/<poster>.jpg
+  title?: string;
+}
+const { url, slug, poster, title = 'Video' } = Astro.props;
+const posterUrl = poster ? withBase(`assets/${slug}/${poster}.jpg`) : undefined;
+---
+
+<div class="vid" data-url={url} data-title={title}>
+  <button class="vid-btn" type="button" aria-label={`Play: ${title}`} style={posterUrl ? `background-image:url('${posterUrl}')` : undefined}>
+    <span class="vid-play" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>
+    </span>
+    <span class="vid-overlay"></span>
+  </button>
+  {title && <p class="vid-caption">{title}</p>}
+</div>
+
+<style>
+  .vid {
+    width: 100%;
+  }
+  .vid-btn {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    cursor: pointer;
+    background-color: var(--bg-card);
+    background-size: cover;
+    background-position: center;
+    padding: 0;
+  }
+  .vid-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, rgba(4, 6, 10, 0.5));
+  }
+  .vid-play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: #04222b;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 0 0 var(--accent-glow);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  .vid-btn:hover .vid-play {
+    transform: scale(1.08);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 0 14px var(--accent-glow);
+  }
+  .vid-play svg {
+    margin-left: 4px;
+  }
+  .vid-caption {
+    margin-top: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+  video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: block;
+    background: #000;
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.vid').forEach((el) => {
+    const btn = el.querySelector('.vid-btn');
+    btn?.addEventListener('click', () => {
+      const url = (el as HTMLElement).dataset.url!;
+      const title = (el as HTMLElement).dataset.title ?? 'Video';
+      const video = document.createElement('video');
+      video.src = url;
+      video.title = title;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = 'metadata';
+      btn.replaceWith(video);
+      video.play().catch(() => {});
+    });
+  });
+</script>

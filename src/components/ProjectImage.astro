@@ -1,0 +1,39 @@
+---
+// Static image card (e.g. official key art). Looks for <slug>/<src>.jpg under
+// public/assets/<slug>/. Matches the 16:9 framing of the video components.
+import { withBase } from '../utils/url';
+
+interface Props {
+  slug: string;
+  src: string;
+  poster?: string; // unused for images; kept for media-type symmetry
+  title?: string;
+}
+const { slug, src, title } = Astro.props;
+const url = withBase(`assets/${slug}/${src}.jpg`);
+---
+
+<figure class="still">
+  <img class="still-img" src={url} alt={title} loading="lazy" width="1280" height="720" />
+  {title && <figcaption class="still-caption">{title}</figcaption>}
+</figure>
+
+<style>
+  .still {
+    margin: 0;
+  }
+  .still-img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .still-caption {
+    margin-top: 0.7rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+  }
+</style>

@@ -1,5 +1,6 @@
 ---
-import { skills, timeline } from '../data/site';
+import { skills, timeline, site } from '../data/site';
+import { withBase } from '../utils/url';
 
 // Group skill bars; level → fill width.
 const levelWidth: Record<string, string> = {
@@ -13,6 +14,11 @@ const levelWidth: Record<string, string> = {
   <div class="container">
     <p class="eyebrow reveal">About</p>
     <h2 class="section-title reveal">Two decades across games, VFX, and real-time graphics</h2>
+
+    <div class="about-intro reveal">
+      <img class="about-photo" src={withBase('assets/profile/eric.jpg')} alt={site.name} width="120" height="120" loading="lazy" />
+      <p class="about-bio">{site.summary}</p>
+    </div>
 
     <div class="about-grid">
       <!-- Career timeline -->
@@ -56,6 +62,36 @@ const levelWidth: Record<string, string> = {
 </section>
 
 <style>
+  .about-intro {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    max-width: 75ch;
+  }
+  .about-photo {
+    flex-shrink: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border-bright);
+    background: var(--bg-card);
+    filter: grayscale(1) contrast(1.02);
+  }
+  .about-bio {
+    color: var(--text-dim);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  @media (max-width: 560px) {
+    .about-intro {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+
   .about-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.85fr);

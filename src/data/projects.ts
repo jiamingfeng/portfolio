@@ -10,15 +10,20 @@
 //  Media items render in order. Each item is ONE of:
 //    { type: 'youtube', id: 'VIDEOID', title?: '...' }
 //    { type: 'loop',    src: 'file', poster?: 'file', title?: '...' }   // silent autoplay loop
+//    { type: 'image',   src: 'file', title?: '...' }                    // static image (e.g. key art)
+//    { type: 'video',   url: 'https://…/clip.mp4', poster?: 'file', title?: '...' } // hosted video w/ sound
 //
-//  For 'loop', `src` is the base name WITHOUT extension; the VideoLoop component
-//  looks for  <src>.mp4  and  <src>.webm  and an optional <poster>.jpg, all inside
-//  public/assets/<slug>/.
+//  For 'loop'/'image', `src` is the base name WITHOUT extension; the components
+//  look for  <src>.mp4 / <src>.webm / <src>.jpg  (and an optional <poster>.jpg),
+//  all inside  public/assets/<slug>/.  For 'video', `url` is a full external URL
+//  and `poster` is an optional local <poster>.jpg under public/assets/<slug>/.
 // =============================================================================
 
 export type MediaItem =
   | { type: 'youtube'; id: string; title?: string }
-  | { type: 'loop'; src: string; poster?: string; title?: string };
+  | { type: 'loop'; src: string; poster?: string; title?: string }
+  | { type: 'image'; src: string; title?: string }
+  | { type: 'video'; url: string; poster?: string; title?: string };
 
 export interface Project {
   slug: string; // folder name under public/assets/ and anchor id
@@ -53,7 +58,10 @@ export const projects: Project[] = [
     ],
     media: [
       { type: 'youtube', id: '7J7J0zm5xFc', title: 'LEGO Brick Editor — Introduction' },
-      { type: 'youtube', id: 'OQhOTe790kY', title: 'LEGO Brick Editor — The Basics' },
+      { type: 'loop', src: 'collision-snap', poster: 'collision-snap-poster', title: 'Detailed collision & proximity snapping' },
+      { type: 'loop', src: 'direct-snap', poster: 'direct-snap-poster', title: 'Direct-snap placement gizmos' },
+      { type: 'loop', src: 'connected-coloring', poster: 'connected-coloring-poster', title: 'Connected-brick coloring' },
+      { type: 'loop', src: 'character-demo', poster: 'character-demo-poster', title: 'Mutable LEGO character demo' },
     ],
   },
   {
@@ -115,7 +123,7 @@ export const projects: Project[] = [
       'Underwater gameplay animation setup.',
       'Adopted an ECS system for physics-simulation optimization.',
     ],
-    media: [],
+    media: [{ type: 'image', src: 'key-art', title: 'Call of Duty: Modern Warfare III — key art' }],
   },
   {
     slug: 'pharos',
@@ -145,7 +153,14 @@ export const projects: Project[] = [
       'Designed and developed foundation modules for the Entity-Component-System (ECS).',
       'Partnered with tech artists to define new workflows for FX, lighting, and animation.',
     ],
-    media: [],
+    officialFootage: true,
+    media: [
+      {
+        type: 'video',
+        url: 'https://media.contentapi.ea.com/content/dam/eacom/en-us/common/frostbite-2023-talent-sizzle-and-ratings.mp4',
+        title: 'Frostbite 2023 — talent sizzle reel',
+      },
+    ],
   },
   {
     slug: 'atlas',

@@ -13,7 +13,7 @@ import Icon from './Icon.astro';
     </p>
 
     <div class="contact-actions">
-      <a class="btn btn-primary" href={`mailto:${contact.email}`}><Icon name="mail" />{contact.email}</a>
+      <a class="btn btn-ghost" href={`mailto:${contact.email}`}><Icon name="mail" />{contact.email}</a>
       <a class="btn btn-ghost" href={contact.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" />LinkedIn</a>
       <a class="btn btn-ghost" href={withBase(contact.resume)} download><Icon name="resume" />Résumé (PDF)</a>
     </div>
@@ -66,15 +66,6 @@ import Icon from './Icon.astro';
     font-weight: 600;
     font-size: 0.98rem;
     transition: transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
-    color: #04222b;
-    box-shadow: 0 8px 30px var(--accent-glow);
-  }
-  .btn-primary:hover {
-    color: #04222b;
-    transform: translateY(-2px);
   }
   .btn-ghost {
     border: 1px solid var(--border-bright);
