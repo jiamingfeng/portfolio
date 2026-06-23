@@ -1,7 +1,6 @@
 ---
 import type { Project } from '../data/projects';
-import YouTubeEmbed from './YouTubeEmbed.astro';
-import VideoLoop from './VideoLoop.astro';
+import Media from './Media.astro';
 
 interface Props {
   project: Project;
@@ -42,21 +41,11 @@ const hasMedia = project.media.length > 0;
 
     {hasMedia && (
       <div class="project-media">
-        {featured.type === 'youtube' ? (
-          <YouTubeEmbed id={featured.id} title={featured.title} />
-        ) : (
-          <VideoLoop slug={project.slug} src={featured.src} poster={featured.poster} title={featured.title} />
-        )}
+        <Media item={featured} slug={project.slug} />
 
         {rest.length > 0 && (
           <div class="media-grid">
-            {rest.map((m) =>
-              m.type === 'youtube' ? (
-                <YouTubeEmbed id={m.id} title={m.title} />
-              ) : (
-                <VideoLoop slug={project.slug} src={m.src} poster={m.poster} title={m.title} />
-              )
-            )}
+            {rest.map((m) => <Media item={m} slug={project.slug} />)}
           </div>
         )}
       </div>

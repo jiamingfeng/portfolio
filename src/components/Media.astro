@@ -1,0 +1,21 @@
+---
+// Dispatches one MediaItem to the right presentational component. Keeps
+// ProjectSection free of per-type branching (used for both the featured slot
+// and each grid item).
+import type { MediaItem } from '../data/projects';
+import YouTubeEmbed from './YouTubeEmbed.astro';
+import VideoLoop from './VideoLoop.astro';
+import ProjectImage from './ProjectImage.astro';
+import VideoEmbed from './VideoEmbed.astro';
+
+interface Props {
+  item: MediaItem;
+  slug: string;
+}
+const { item, slug } = Astro.props;
+---
+
+{item.type === 'youtube' && <YouTubeEmbed id={item.id} title={item.title} />}
+{item.type === 'loop' && <VideoLoop slug={slug} src={item.src} poster={item.poster} title={item.title} />}
+{item.type === 'image' && <ProjectImage slug={slug} src={item.src} title={item.title} />}
+{item.type === 'video' && <VideoEmbed url={item.url} slug={slug} poster={item.poster} title={item.title} />}

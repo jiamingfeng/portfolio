@@ -53,4 +53,12 @@ convert "$EX/ZipToCover_Left.mp4"                   exodus zip-to-cover
 convert "$EX/NPCAnimGym_traversal_inmotion.gif"     exodus npc-traversal
 convert "$EX/NPCAnimGym_Aim.gif"                    exodus npc-aim
 
+LEGO="LEGO_BRICK_EDITOR"
+
+# --- LEGO Brick Editor: specific feature demos ---
+convert "$LEGO/AtomBrickDetailedCollision_ProximitySnap_03.mp4" lego-brick-editor collision-snap
+convert "$LEGO/direct-snap-gizmos.mp4"                          lego-brick-editor direct-snap
+convert "$LEGO/ConnectedBricksColoring.mp4"                     lego-brick-editor connected-coloring
+convert "$LEGO/Mutable_LEGO_Character_Demo_v1.mp4"              lego-brick-editor character-demo
+
 echo "Done. Outputs in public/assets/*/"
