@@ -45,7 +45,7 @@ export const timeline: {
   {
     role: 'Lead Software Engineer',
     company: 'The LEGO Group',
-    period: '04/2023 – Present',
+    period: '12/2024 – Present',
     location: 'Billund, Denmark',
     points: [
       'Lead development of the LEGO Digital Brick SDK on Unreal Engine, enabling authentic LEGO brick-building experiences within the UEFN ecosystem.',
@@ -55,7 +55,7 @@ export const timeline: {
   {
     role: 'Principal Gameplay Engineer',
     company: 'Self-Employed',
-    period: '05/2020 – Present',
+    period: '06/2022 – Present',
     location: 'Remote',
     points: [
       'Independent gameplay & animation consultant.',
@@ -65,7 +65,7 @@ export const timeline: {
   {
     role: 'Expert Gameplay Engineer',
     company: 'Sledgehammer Games, Activision',
-    period: '11/2021 – 02/2023',
+    period: '11/2021 – 05/2022',
     location: 'Melbourne, Australia',
     points: [
       'Researched and implemented gameplay mechanics for upcoming Call of Duty titles.',
