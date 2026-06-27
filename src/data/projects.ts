@@ -158,6 +158,7 @@ export const projects: Project[] = [
       {
         type: 'video',
         url: 'https://media.contentapi.ea.com/content/dam/eacom/en-us/common/frostbite-2023-talent-sizzle-and-ratings.mp4',
+        poster: 'poster.png',
         title: 'Frostbite 2023 — talent sizzle reel',
       },
     ],

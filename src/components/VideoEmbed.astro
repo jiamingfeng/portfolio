@@ -7,11 +7,14 @@ import { withBase } from '../utils/url';
 interface Props {
   url: string; // full external video URL
   slug: string;
-  poster?: string; // optional local poster: assets/<slug>/<poster>.jpg
+  // Optional local poster file under assets/<slug>/. Include the extension
+  // (e.g. 'poster.png'); a bare base name is treated as <name>.jpg.
+  poster?: string;
   title?: string;
 }
 const { url, slug, poster, title = 'Video' } = Astro.props;
-const posterUrl = poster ? withBase(`assets/${slug}/${poster}.jpg`) : undefined;
+const posterFile = poster ? (poster.includes('.') ? poster : `${poster}.jpg`) : undefined;
+const posterUrl = posterFile ? withBase(`assets/${slug}/${posterFile}`) : undefined;
 ---
 
 <div class="vid" data-url={url} data-title={title}>
