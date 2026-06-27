@@ -44,7 +44,7 @@ export const projects: Project[] = [
     slug: 'lego-brick-editor',
     title: 'LEGO Brick Editor — Unreal Engine / UEFN',
     role: 'Lead Software Engineer · The LEGO Group',
-    period: '04/2023 – Present',
+    period: '12/2024 – Present',
     link: {
       label: 'Epic Games documentation',
       url: 'https://dev.epicgames.com/documentation/fortnite/lego-brick-editor-in-fortnite',
