@@ -25,7 +25,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          # Astro 7 requires Node >= 22.12 (see "engines" in its package.json).
+          node-version: 22
           cache: npm
 
       - name: Install dependencies

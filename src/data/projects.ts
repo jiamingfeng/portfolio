@@ -25,6 +25,52 @@ export type MediaItem =
   | { type: 'image'; src: string; title?: string }
   | { type: 'video'; url: string; poster?: string; title?: string };
 
+/**
+ *  Skill tags shown as pills under each project's title.
+ *
+ *  This is a CLOSED vocabulary on purpose: a union means a typo fails the build
+ *  instead of quietly creating a near-duplicate pill ("C++" vs "C/C++"). To use a
+ *  tag that isn't here yet, add it to the union first — that keeps the set small
+ *  and consistent across projects.
+ *
+ *  'Proprietary Engine' covers in-house engines that can't be named (the CoD
+ *  engine, Wētā's internal stack). Frostbite is public, so it's named.
+ */
+export type Tag =
+  // engines
+  | 'Unreal Engine'
+  | 'Unity'
+  | 'Frostbite'
+  | 'Proprietary Engine'
+  // languages
+  | 'C++'
+  | 'C#'
+  // gameplay
+  | 'Gameplay'
+  | '3C'
+  | 'Animation'
+  | 'Physics'
+  | 'NPC AI'
+  | 'GAS' // Unreal's Gameplay Ability System
+  // tools & architecture
+  | 'ECS'
+  | 'Editor Tooling'
+  | 'UX'
+  | 'API Design'
+  | 'Scene Description'
+  | 'Evaluation Engine'
+  | 'Pipeline'
+  // XR
+  | 'AR'
+  | 'VR'
+  | 'MR'
+  | 'XR'
+  // systems
+  | 'Rendering'
+  | 'Performance'
+  | 'Console'
+  | 'Online Services';
+
 export interface Project {
   slug: string; // folder name under public/assets/ and anchor id
   title: string;
@@ -36,6 +82,8 @@ export interface Project {
   officialFootage?: boolean;
   blurb: string; // one-line framing of the project
   contributions: string[]; // bullet points — what Eric did
+  /** Tech / discipline pills. Up to ~7; engine or domain first. */
+  tags?: Tag[];
   media: MediaItem[];
 }
 
@@ -56,6 +104,7 @@ export const projects: Project[] = [
       'Built creator-facing tooling for high-fidelity brick placement and building.',
       'Support internal and external vendors adopting the Atom framework in UE5 projects.',
     ],
+    tags: ['Unreal Engine', 'C++', 'Editor Tooling', 'UX', 'Physics', 'Performance'],
     media: [
       { type: 'youtube', id: '7J7J0zm5xFc', title: 'LEGO Brick Editor — Introduction' },
       { type: 'loop', src: 'collision-snap', poster: 'collision-snap-poster', title: 'Detailed collision & proximity snapping' },
@@ -77,6 +126,7 @@ export const projects: Project[] = [
       'Implemented player traversal gameplay and gameplay animation.',
       'Ensured systems interoperate with GAS, companion systems, and NPC interactions.',
     ],
+    tags: ['Unreal Engine', 'Gameplay', '3C', 'Animation', 'NPC AI', 'GAS', 'C++'],
     // Full gameplay leads; the loops below isolate the specific systems Eric owned.
     media: [
       { type: 'youtube', id: 'ye14LA-FJnY', title: 'Exodus — Gameplay Walkthrough' },
@@ -102,6 +152,7 @@ export const projects: Project[] = [
       'Set up the Epic Online Services subsystem integrated with PlayFab.',
       'Performance tuning for character spawning, garbage collection, and load times.',
     ],
+    tags: ['Unreal Engine', 'C++', 'Console', 'Online Services', 'Performance'],
     media: [
       { type: 'youtube', id: '4RhVFeNIBi0', title: 'Towerborne — Announce Trailer (Xbox)' },
       { type: 'youtube', id: 'YQlDe-tBV4E', title: 'Towerborne — Gameplay Trailer, Gamescom 2024 (Xbox)' },
@@ -123,6 +174,7 @@ export const projects: Project[] = [
       'Underwater gameplay animation setup.',
       'Adopted an ECS system for physics-simulation optimization.',
     ],
+    tags: ['Proprietary Engine', 'C++', 'Gameplay', 'Animation', 'ECS'],
     media: [{ type: 'image', src: 'key-art', title: 'Call of Duty: Modern Warfare III — key art' }],
   },
   {
@@ -140,6 +192,7 @@ export const projects: Project[] = [
       '2019 VES Award — Outstanding Visual Effects in a Special Venue Project.',
       'Main developer for dome-projection VR preview, gameplay, and interactive concert graphics.',
     ],
+    tags: ['Unreal Engine', 'C++', 'VR', 'Rendering', 'Gameplay'],
     media: [{ type: 'youtube', id: 'DTAW0i7NSoo', title: 'Childish Gambino Creates a Fantasy World for Pharos — Unreal Engine' }],
   },
   {
@@ -153,6 +206,7 @@ export const projects: Project[] = [
       'Designed and developed foundation modules for the Entity-Component-System (ECS).',
       'Partnered with tech artists to define new workflows for FX, lighting, and animation.',
     ],
+    tags: ['Frostbite', 'C++', 'ECS', 'Rendering', 'Animation'],
     officialFootage: true,
     media: [
       {
@@ -174,6 +228,87 @@ export const projects: Project[] = [
       'Developed the proprietary scene description format and API library (Atlas) for Wētā Digital.',
       'Focused on low-level API design, animation, evaluation system, and real-time rendering for the proprietary scene data.',
     ],
+    tags: ['Scene Description', 'API Design', 'C++', 'Evaluation Engine', 'Animation', 'Pipeline'],
     media: [{ type: 'youtube', id: 'e8DUEO_Sr7Y', title: 'Atlas — Wētā Digital scene description' }],
   },
 ];
+
+// =============================================================================
+//  XR-ONLY PROJECTS — shown on the XR page (src/pages/xr.astro), not the general
+//  page. Kept in a separate array so the main showcase order stays untouched;
+//  move an entry into `projects` above if you want it on the front page too.
+// =============================================================================
+
+export const xrOnlyProjects: Project[] = [
+  {
+    slug: 'ar-scouting',
+    title: 'AR Location Scouting — iPad AR Virtual Camera',
+    role: 'Designer & Developer · Wētā FX',
+    period: '11/2019 – 02/2020',
+    blurb:
+      'Unity iPad AR app that let a director stand on the real set, place virtual characters in it, and frame the shot through an AR virtual camera.',
+    contributions: [
+      'Designed and implemented the location-scouting capability end to end.',
+      'Built the AR virtual camera — device pose driving shot framing against the physical set.',
+      'Real-time placement and visualization of virtual characters anchored in the scouted location.',
+    ],
+    tags: ['Unity', 'C#', 'AR', 'UX', 'Gameplay'],
+    // TODO(eric): confirm the AR stack (ARFoundation / ARKit?) and we can name it
+    // in the blurb + add an 'API Design'-style tag if warranted.
+    media: [
+      // TODO(eric): upload the full narrated walkthrough (unlisted is fine), then
+      // uncomment and paste the id here. Because media[0] renders large, doing so
+      // automatically promotes the video to the featured slot above the loops.
+      // { type: 'youtube', id: 'REPLACE_ME', title: 'AR Location Scouting — full walkthrough' },
+      { type: 'loop', src: 'scout-character', poster: 'scout-character-poster', title: 'Virtual character on location — time-of-day preview' },
+      { type: 'loop', src: 'scout-camera', poster: 'scout-camera-poster', title: 'On-device AR placement on the real set' },
+      { type: 'loop', src: 'scout-scan', poster: 'scout-scan-poster', title: 'Scanned location with AR markers' },
+    ],
+  },
+  {
+    slug: 'holoplayer',
+    title: 'Holoplayer — HoloLens Mixed Reality',
+    role: 'Lead Designer & Developer · Wētā FX',
+    period: '03/2019 – 05/2019',
+    blurb:
+      'Unity HoloLens app that lets users align a shared play space and watch animated characters perform inside it.',
+    contributions: [
+      'Main designer and developer.',
+      'Spatial alignment registering the virtual play space to the real room.',
+      'Animated character playback and visualization on untethered AR hardware.',
+    ],
+    tags: ['Unity', 'C#', 'UX', 'AR', 'MR', 'XR', 'Animation'],
+    // TODO(eric): confirm whether this used MRTK — worth naming if so.
+    media: [
+      // TODO(eric): same as above — paste the walkthrough id to feature it.
+      // { type: 'youtube', id: 'REPLACE_ME', title: 'Holoplayer — full walkthrough' },
+      { type: 'loop', src: 'holo-align', poster: 'holo-align-poster', title: 'Aligning the play space to the real room' },
+      { type: 'loop', src: 'holo-playback', poster: 'holo-playback-poster', title: 'Animated characters performing in place' },
+    ],
+  },
+];
+
+// -----------------------------------------------------------------------------
+//  Lookup used by the XR page to reuse a project with re-framed copy, without
+//  duplicating the entry (and therefore keeping the same `slug` → same media
+//  folder under public/assets/).
+// -----------------------------------------------------------------------------
+
+const bySlug = new Map<string, Project>(
+  [...projects, ...xrOnlyProjects].map((p) => [p.slug, p])
+);
+
+/**
+ *  Fetch a project by slug, shallow-merging any per-page overrides
+ *  (`blurb`, `contributions`, `tags`, …). Throws at build time on an unknown
+ *  slug so a typo is a build failure rather than a silently missing section.
+ */
+export function projectBySlug(slug: string, overrides: Partial<Project> = {}): Project {
+  const base = bySlug.get(slug);
+  if (!base) {
+    throw new Error(
+      `projectBySlug: unknown slug "${slug}". Known slugs: ${[...bySlug.keys()].join(', ')}`
+    );
+  }
+  return { ...base, ...overrides };
+}

@@ -12,7 +12,10 @@ interface Props {
 }
 const { slug, src, poster, title } = Astro.props;
 const dir = withBase(`assets/${slug}/`);
-const posterUrl = poster ? `${dir}${poster}.jpg` : undefined;
+// WebP poster with no fallback is safe here: the `poster` attribute takes a
+// single URL, and this stylesheet already requires browsers far newer than
+// WebP does (color-mix, svh). scripts/optimize-images.sh guarantees the sibling.
+const posterUrl = poster ? `${dir}${poster}.webp` : undefined;
 ---
 
 <figure class="loop">

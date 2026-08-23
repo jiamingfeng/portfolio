@@ -20,6 +20,11 @@ const hasMedia = project.media.length > 0;
     <div>
       <h3 class="project-title">{project.title}</h3>
       <p class="project-role">{project.role} · <span class="project-period">{project.period}</span></p>
+      {project.tags && project.tags.length > 0 && (
+        <ul class="project-tags" aria-label="Technologies and disciplines">
+          {project.tags.map((t) => <li class="tag">{t}</li>)}
+        </ul>
+      )}
     </div>
   </div>
 
@@ -82,6 +87,28 @@ const hasMedia = project.media.length > 0;
     font-family: var(--font-mono);
     font-size: 0.85rem;
     color: var(--text-faint);
+  }
+
+  /* Tech / discipline pills. Same geometry as .badge below, but accent-tinted so
+     they read as content while the faint "Official footage" badge stays a note. */
+  .project-tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+    margin-top: 0.9rem;
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+    border-radius: 999px;
+    padding: 0.22rem 0.62rem;
   }
 
   .project-body {

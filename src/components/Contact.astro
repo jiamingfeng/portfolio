@@ -1,21 +1,26 @@
 ---
-import { site, contact } from '../data/site';
+import { contact } from '../data/site';
+import { generalProfile, type Profile } from '../data/profiles';
 import { withBase } from '../utils/url';
 import Icon from './Icon.astro';
+
+interface Props {
+  profile?: Profile;
+}
+const { profile = generalProfile } = Astro.props;
 ---
 
 <section class="section contact" id="contact">
   <div class="container contact-inner reveal">
     <p class="eyebrow">Contact</p>
     <h2 class="contact-title">Together, let’s build something great.</h2>
-    <p class="contact-sub">
-      Open to Principal / Lead engineering roles in games, real-time graphics, and engine technology.
-    </p>
+    <p class="contact-sub">{profile.contactPitch}</p>
 
     <div class="contact-actions">
       <a class="btn btn-ghost" href={`mailto:${contact.email}`}><Icon name="mail" />{contact.email}</a>
       <a class="btn btn-ghost" href={contact.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" />LinkedIn</a>
-      <a class="btn btn-ghost" href={withBase(contact.resume)} download><Icon name="resume" />Résumé (PDF)</a>
+      <a class="btn btn-primary" href={withBase(contact.resume)} download><Icon name="resume" />Résumé (PDF)</a>
+      <a class="btn btn-ghost" href={withBase(profile.sibling.path)}><Icon name="switch" />{profile.sibling.label}</a>
     </div>
 
     <div class="credits">
@@ -75,6 +80,18 @@ import Icon from './Icon.astro';
     color: var(--text);
     border-color: var(--accent);
     transform: translateY(-2px);
+  }
+  /* Résumé is the primary action here — same solid treatment as the hero's
+     "View work" button, so the main CTA looks the same on both pages. */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #04222b;
+    box-shadow: 0 8px 30px var(--accent-glow);
+  }
+  .btn-primary:hover {
+    color: #04222b;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px var(--accent-glow);
   }
 
   .credits {

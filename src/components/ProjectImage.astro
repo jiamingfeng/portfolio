@@ -10,11 +10,18 @@ interface Props {
   title?: string;
 }
 const { slug, src, title } = Astro.props;
-const url = withBase(`assets/${slug}/${src}.jpg`);
+const dir = withBase(`assets/${slug}/`);
+// scripts/optimize-images.sh writes a .webp sibling for every still, so serve
+// that and keep the .jpg as the <img> fallback — <picture> costs nothing.
+const url = `${dir}${src}.jpg`;
+const webp = `${dir}${src}.webp`;
 ---
 
 <figure class="still">
-  <img class="still-img" src={url} alt={title} loading="lazy" width="1280" height="720" />
+  <picture>
+    <source srcset={webp} type="image/webp" />
+    <img class="still-img" src={url} alt={title} loading="lazy" width="1280" height="720" />
+  </picture>
   {title && <figcaption class="still-caption">{title}</figcaption>}
 </figure>
 

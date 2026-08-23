@@ -1,4 +1,7 @@
 ---
+// The general portfolio — Principal / Lead engine & graphics pitch.
+// Its XR-focused sibling is xr.astro; both compose the same components and
+// differ only by the Profile they're handed. See src/data/profiles.ts.
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Hero from '../components/Hero.astro';
@@ -6,26 +9,26 @@ import ProjectSection from '../components/ProjectSection.astro';
 import About from '../components/About.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import { projects } from '../data/projects';
+import { generalProfile as profile } from '../data/profiles';
 ---
 
-<Base>
+<Base title={profile.seoTitle} description={profile.seoDescription}>
   <Nav />
   <main>
-    <Hero />
+    <Hero profile={profile} />
 
     <section class="section work" id="work">
       <div class="container">
-        <p class="eyebrow reveal">Selected work</p>
-        <h2 class="section-title reveal">Projects</h2>
+        <p class="eyebrow reveal">{profile.workEyebrow}</p>
+        <h2 class="section-title reveal">{profile.workTitle}</h2>
       </div>
       <div class="container projects">
-        {projects.map((project, i) => <ProjectSection project={project} index={i} />)}
+        {profile.projects.map((project, i) => <ProjectSection project={project} index={i} />)}
       </div>
     </section>
 
-    <About />
-    <Contact />
+    <About profile={profile} />
+    <Contact profile={profile} />
   </main>
   <Footer />
 </Base>

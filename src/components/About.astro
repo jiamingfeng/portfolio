@@ -1,6 +1,13 @@
 ---
-import { skills, timeline, site } from '../data/site';
+import { site } from '../data/site';
+import { generalProfile, type Profile } from '../data/profiles';
 import { withBase } from '../utils/url';
+
+interface Props {
+  profile?: Profile;
+}
+const { profile = generalProfile } = Astro.props;
+const { skills, timeline } = profile;
 
 // Group skill bars; level → fill width.
 const levelWidth: Record<string, string> = {
@@ -13,11 +20,14 @@ const levelWidth: Record<string, string> = {
 <section class="section about" id="about">
   <div class="container">
     <p class="eyebrow reveal">About</p>
-    <h2 class="section-title reveal">Two decades across games, VFX, and real-time graphics</h2>
+    <h2 class="section-title reveal">{profile.aboutTitle}</h2>
 
     <div class="about-intro reveal">
-      <img class="about-photo" src={withBase('assets/profile/eric.jpg')} alt={site.name} width="120" height="120" loading="lazy" />
-      <p class="about-bio">{site.summary}</p>
+      <picture class="about-photo-wrap">
+        <source srcset={withBase('assets/profile/eric-240.webp')} type="image/webp" />
+        <img class="about-photo" src={withBase('assets/profile/eric-240.jpg')} alt={site.name} width="120" height="120" loading="lazy" />
+      </picture>
+      <p class="about-bio">{profile.summary}</p>
     </div>
 
     <div class="about-grid">
@@ -68,6 +78,11 @@ const levelWidth: Record<string, string> = {
     gap: 1.5rem;
     margin-top: 2rem;
     max-width: 75ch;
+  }
+  /* <picture> is the flex item now, so it carries the no-shrink. */
+  .about-photo-wrap {
+    flex-shrink: 0;
+    line-height: 0;
   }
   .about-photo {
     flex-shrink: 0;

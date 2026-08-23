@@ -1,0 +1,43 @@
+---
+// The XR portfolio — Senior XR Software Engineer pitch, served at /xr.
+// Identical composition to index.astro; everything that differs (copy, project
+// lineup and framing, skill order) lives in `xrProfile`. See src/data/profiles.ts.
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import ProjectSection from '../components/ProjectSection.astro';
+import About from '../components/About.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { xrProfile as profile } from '../data/profiles';
+---
+
+<Base title={profile.seoTitle} description={profile.seoDescription}>
+  <Nav />
+  <main>
+    <Hero profile={profile} />
+
+    <section class="section work" id="work">
+      <div class="container">
+        <p class="eyebrow reveal">{profile.workEyebrow}</p>
+        <h2 class="section-title reveal">{profile.workTitle}</h2>
+      </div>
+      <div class="container projects">
+        {profile.projects.map((project, i) => <ProjectSection project={project} index={i} />)}
+      </div>
+    </section>
+
+    <About profile={profile} />
+    <Contact profile={profile} />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .work {
+    padding-bottom: clamp(2rem, 5vw, 4rem);
+  }
+  .projects {
+    margin-top: 2.5rem;
+  }
+</style>
