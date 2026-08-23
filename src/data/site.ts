@@ -26,7 +26,12 @@ export const contact = {
 
 export type SkillLevel = 'expert' | 'advanced' | 'proficient';
 
-export const skills: { name: string; level: SkillLevel }[] = [
+export interface Skill {
+  name: string;
+  level: SkillLevel;
+}
+
+export const skills: Skill[] = [
   { name: 'C / C++', level: 'expert' },
   { name: 'Unreal Engine', level: 'expert' },
   { name: 'Computer Graphics', level: 'advanced' },
@@ -35,13 +40,15 @@ export const skills: { name: string; level: SkillLevel }[] = [
   { name: 'Unity / C#', level: 'proficient' },
 ];
 
-export const timeline: {
+export interface TimelineEntry {
   role: string;
   company: string;
   period: string;
   location: string;
   points: string[];
-}[] = [
+}
+
+export const timeline: TimelineEntry[] = [
   {
     role: 'Lead Software Engineer',
     company: 'The LEGO Group',

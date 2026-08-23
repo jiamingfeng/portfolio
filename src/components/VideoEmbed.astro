@@ -7,14 +7,16 @@ import { withBase } from '../utils/url';
 interface Props {
   url: string; // full external video URL
   slug: string;
-  // Optional local poster file under assets/<slug>/. Include the extension
-  // (e.g. 'poster.png'); a bare base name is treated as <name>.jpg.
+  // Optional local poster under assets/<slug>/. Either a bare base name or one
+  // with an extension ('poster.png') — either way the .webp sibling is served.
   poster?: string;
   title?: string;
 }
 const { url, slug, poster, title = 'Video' } = Astro.props;
-const posterFile = poster ? (poster.includes('.') ? poster : `${poster}.jpg`) : undefined;
-const posterUrl = posterFile ? withBase(`assets/${slug}/${posterFile}`) : undefined;
+// Serve the .webp sibling that scripts/optimize-images.sh generates for every
+// still — this is a CSS background, so there's no <picture> fallback to give it.
+const posterFile = poster ? poster.replace(/\.(jpe?g|png)$/i, '') : undefined;
+const posterUrl = posterFile ? withBase(`assets/${slug}/${posterFile}.webp`) : undefined;
 ---
 
 <div class="vid" data-url={url} data-title={title}>

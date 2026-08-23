@@ -1,21 +1,26 @@
 ---
 import { site, contact } from '../data/site';
-import { projects } from '../data/projects';
+import { generalProfile, type Profile } from '../data/profiles';
 import { withBase } from '../utils/url';
 
-// Marquee of shipped titles, sourced from project data.
-const titles = projects.map((p) => p.title.split(' — ')[0]);
+interface Props {
+  profile?: Profile;
+}
+const { profile = generalProfile } = Astro.props;
+
+// Marquee of shipped titles, sourced from this profile's project data.
+const titles = profile.projects.map((p) => p.title.split(' — ')[0]);
 ---
 
 <section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true" style={`background-image:url('${withBase('assets/banner/banner.jpg')}')`}></div>
+  <div class="hero-bg" aria-hidden="true" style={`background-image:url('${withBase(`assets/${profile.banner}`)}')`}></div>
   <div class="container hero-inner">
     <p class="eyebrow reveal">{site.pedigree}</p>
 
     <h1 class="hero-name reveal">{site.name}</h1>
-    <p class="hero-tagline reveal">{site.tagline}</p>
+    <p class="hero-tagline reveal">{profile.tagline}</p>
 
-    <p class="hero-summary reveal">{site.summary}</p>
+    <p class="hero-summary reveal">{profile.summary}</p>
 
     <div class="hero-actions reveal">
       <a class="btn btn-primary" href="#work">View work</a>

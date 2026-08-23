@@ -6,6 +6,7 @@
 - 📱 +45-60348346
 - 📍 Denmark
 - 🔗 [linkedin.com/in/jiamingfeng](https://www.linkedin.com/in/jiamingfeng)
+- 🎬 [jiamingfeng.github.io/portfolio](https://jiamingfeng.github.io/portfolio)
 
 ---
 
@@ -18,20 +19,20 @@ With over 20 years of dedicated experience in the software industry, I am a pass
 ## Work Experience
 
 ### Lead Software Engineer — The LEGO Group
-*04/2023 – Present · Billund, Denmark*
+*12/2024 – Present · Billund, Denmark*
 
 - Lead development of the LEGO Digital Brick SDK on Unreal Engine, enabling authentic LEGO brick-building experiences within the UEFN ecosystem.
 - Spearhead a cross-functional team to deliver intuitive digital building UX, high-fidelity brick physics, character animation systems, and performance-optimized tooling for creators.
 
-### Principle Gameplay Engineer — Self-Employed
-*05/2020 – Present · Remote*
+### Principal Gameplay Engineer — Self-Employed
+*06/2022 – Present · Remote*
 
 - Independent Game Development Consultant specializing in gameplay systems and animation.
 - Collaborate closely with design and animation teams to architect and implement advanced gameplay mechanics, with a focus on character traversal, 3C (Character, Camera, Controls), and AI behavior.
 - Deliver high-impact solutions that elevate player experience and technical fidelity across diverse projects.
 
 ### Expert Gameplay Engineer — Sledgehammer Games, Activision
-*11/2021 – 02/2023 · Melbourne, Australia*
+*11/2021 – 05/2022 · Melbourne, Australia*
 
 - Research and implement gameplay mechanics for up-coming Call of Duty games.
 - Optimize loot pickup and destruction system with ECS framework.
@@ -64,7 +65,7 @@ With over 20 years of dedicated experience in the software industry, I am a pass
 ## Projects
 
 ### [Lego Brick Editor in Unreal Engine / UEFN](https://dev.epicgames.com/documentation/fortnite/lego-brick-editor-in-fortnite)
-*04/2023 – Present*
+*12/2024 – Present*
 
 - A collaboration project with Epic Games. It is used in LEGO Fortnite and UEFN.
 - Lead Software Engineer. Have been working on user experience of digital brick building, animations, physics and optimization.
@@ -97,6 +98,20 @@ With over 20 years of dedicated experience in the software industry, I am a pass
 
 - Design and develop foundation modules for Entity-Component-System (ECS) in Frostbite engine.
 - Collaborate with tech artists to define new workflows for FX, Lighting and Animation.
+
+### AR Location Scouting — Wētā FX
+*11/2019 – 02/2020*
+
+- Designed and implemented the location-scouting capability in a Unity iPad AR application.
+- Built an AR virtual camera that let directors visualize virtual characters on the real set and frame the shot in place.
+- Real-time placement and visualization of characters anchored in the scouted location, with time-of-day lighting preview.
+
+### Holoplayer — Wētā FX
+*03/2019 – 05/2019*
+
+- Main designer and developer of a Unity HoloLens mixed-reality application.
+- Spatial alignment registering the virtual play space to the real room, so users share a common coordinate frame.
+- Animated character playback and visualization on untethered AR hardware.
 
 ### [Childish Gambino's Pharos](https://www.unrealengine.com/spotlights/childish-gambino-mesmerizes-fans-with-real-time-animation)
 *09/2018 – 12/2018*
