@@ -80,7 +80,7 @@ export const generalProfile: Profile = {
   path: '',
   tagline: site.tagline,
   summary: site.summary,
-  banner: 'banner/banner.webp', // LEGO · Exodus · Pharos dome VR
+  banner: 'banner/banner.webp', // LEGO · Exodus · Pharos dome (blended seams)
   seoTitle: site.name,
   seoDescription: site.seoDescription,
   workEyebrow: 'Selected work',
