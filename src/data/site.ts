@@ -31,13 +31,18 @@ export interface Skill {
   level: SkillLevel;
 }
 
+// Mirrors the résumé's skill bars (ResumeBuilder content/eric_feng_2p.md):
+// 90 → expert, 80 → advanced, 70 → proficient.
 export const skills: Skill[] = [
   { name: 'C / C++', level: 'expert' },
   { name: 'Unreal Engine', level: 'expert' },
-  { name: 'Computer Graphics', level: 'advanced' },
-  { name: 'VR / AR / XR', level: 'advanced' },
-  { name: 'GPU Programming', level: 'proficient' },
-  { name: 'Unity / C#', level: 'proficient' },
+  { name: 'VR / AR / XR', level: 'expert' },
+  { name: 'AI / Animation / GPU Programming', level: 'advanced' },
+  { name: 'DCC (Maya / Blender / Houdini)', level: 'advanced' },
+  { name: 'Asset Pipeline', level: 'advanced' },
+  { name: 'UX / Qt / ImGui', level: 'proficient' },
+  { name: 'Unity', level: 'proficient' },
+  { name: 'C# / Python', level: 'proficient' },
 ];
 
 export interface TimelineEntry {
@@ -96,7 +101,37 @@ export const timeline: TimelineEntry[] = [
     location: 'Wellington, New Zealand',
     points: [
       'Designed award-winning real-time interactive VR/AR/XR applications in Unreal Engine and Unity — gameplay, character animation, rendering, performance profiling.',
-      'Main developer for an Academy Award-winning scene description system (Atlas): low-level API design, animation, evaluation, and real-time rendering of proprietary scene data.',
+      'Main developer for an Academy Sci-Tech Award-winning scene description system (Atlas): low-level API design, animation, evaluation, and real-time rendering of proprietary scene data.',
+    ],
+  },
+  {
+    role: 'R&D Engineer',
+    company: 'Industrial Light & Magic',
+    period: '09/2011 – 07/2013',
+    location: 'Singapore',
+    points: [
+      'Designed and developed Block Party 2, ILM’s proprietary procedural rigging system and an Academy Sci-Tech Award winner.',
+      'Developed HoudiniBatch, a render-farm manager that let FX artists get the most out of the Academy Award-winning ObaQ render-queue system.',
+    ],
+  },
+  {
+    role: 'Motion Capture Pipeline Technical Director',
+    company: 'Framestore',
+    period: '09/2010 – 09/2011',
+    location: 'London, UK',
+    points: [
+      'Built the motion capture data pipeline and production tools from scratch — data repository management, an in-house MotionBuilder real-time control panel, and Vicon mocap processing.',
+      'On-stage technical support for shows including Gravity (2013) and Wrath of the Titans (2012).',
+    ],
+  },
+  {
+    role: 'Software Engineer',
+    company: 'Autodesk',
+    period: '12/2007 – 08/2010',
+    location: 'Shanghai, China',
+    points: [
+      'Designed, developed, and maintained the Autodesk FBX library (SDK and plug-ins), Autodesk Material Library, and Autodesk Mudbox.',
+      'Collaborated with Autodesk product teams across countries on the FBX pipeline, and helped high-profile clients resolve technical issues.',
     ],
   },
 ];

@@ -123,9 +123,12 @@ export const xrProfile: Profile = {
     'VR / AR / XR',
     'Unreal Engine',
     'C / C++',
-    'Unity / C#',
-    'Computer Graphics',
-    'GPU Programming',
+    'Unity',
+    'C# / Python',
+    'AI / Animation / GPU Programming',
+    'UX / Qt / ImGui',
+    'DCC (Maya / Blender / Houdini)',
+    'Asset Pipeline',
   ]),
   // Shared with the front page: the Wētā entry already leads with the VR/AR/XR
   // work and the LEGO entry already names creator tooling. Give this its own
@@ -166,10 +169,11 @@ export const xrProfile: Profile = {
     }),
     projectBySlug('atlas', {
       blurb:
-        'Low-level API and real-time rendering for the scene-description system behind an Academy Award-winning pipeline.',
+        'Low-level API and real-time rendering for Wētā FX’s Academy Sci-Tech Award-winning scene-description system.',
       contributions: [
-        'Designed the proprietary scene description format and API library used across the pipeline.',
-        'Owned low-level API design, animation, the evaluation system, and real-time rendering of scene data.',
+        'The system received a 2024 Academy® Scientific and Technical Award (Technical Achievement).',
+        'Main developer: designed and maintained a binary-compatible C++ / Python API.',
+        'Designed, implemented, and optimized the evaluation framework behind real-time rendering of scene data.',
       ],
       // Tags inherited from projects.ts — same set on both pages.
     }),

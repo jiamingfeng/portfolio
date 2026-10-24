@@ -255,19 +255,18 @@ into the cuts above.
 
 ## 9. Update the résumé
 
-[`resume.md`](resume.md) is the written source; `public/resume.pdf` is what visitors
-download. **They are not linked by any script** — editing the markdown does not change the
-PDF. The current PDF was produced with Chrome's Print to PDF, so to publish a change:
+The résumé is built by the separate **ResumeBuilder** repo (`E:\dev\projects\ResumeBuilder`);
+`public/resume.pdf` is what visitors download. To publish a change:
 
-1. Edit `resume.md`.
-2. Open it rendered (VS Code preview, or any markdown viewer) and **Print → Save as PDF**
-   from Chrome.
-3. Save over **both** `resume.pdf` (repo root) and `public/resume.pdf` — the served copy
+1. Edit `content/eric_feng_2p.md` in ResumeBuilder.
+2. Run `python build_resume.py content/eric_feng_2p.md` there → `output/eric_feng_2p.pdf`.
+3. Copy it over **both** `resume.pdf` (repo root) and `public/resume.pdf` — the served copy
    is the one in `public/`. The hero and contact "Download résumé" buttons pick it up
    automatically.
 
-Keep dates consistent with `timeline` in `src/data/site.ts` — the site and the résumé are
-read side by side.
+That markdown is the source of truth for the site's copy too: keep `timeline` and `skills`
+in `src/data/site.ts` and project dates/bullets in `src/data/projects.ts` in step with it —
+the site and the résumé are read side by side.
 
 ## 10. Change identity / contact / skills / timeline
 

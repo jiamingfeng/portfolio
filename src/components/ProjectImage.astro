@@ -8,8 +8,9 @@ interface Props {
   src: string;
   poster?: string; // unused for images; kept for media-type symmetry
   title?: string;
+  scale?: number; // 0–1 fraction of the column width; see MediaItem
 }
-const { slug, src, title } = Astro.props;
+const { slug, src, title, scale = 1 } = Astro.props;
 const dir = withBase(`assets/${slug}/`);
 // scripts/optimize-images.sh writes a .webp sibling for every still, so serve
 // that and keep the .jpg as the <img> fallback — <picture> costs nothing.
@@ -17,7 +18,7 @@ const url = `${dir}${src}.jpg`;
 const webp = `${dir}${src}.webp`;
 ---
 
-<figure class="still">
+<figure class="still" style={scale < 1 ? `max-width:${scale * 100}%` : undefined}>
   <picture>
     <source srcset={webp} type="image/webp" />
     <img class="still-img" src={url} alt={title} loading="lazy" width="1280" height="720" />
@@ -31,6 +32,9 @@ const webp = `${dir}${src}.webp`;
   }
   .still-img {
     width: 100%;
+    /* The width/height attributes (for layout-shift reservation) would otherwise
+       pin the height at 720px and let object-fit zoom-crop at narrower widths. */
+    height: auto;
     aspect-ratio: 16 / 9;
     object-fit: cover;
     background: var(--bg-card);
