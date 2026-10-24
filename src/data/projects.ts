@@ -10,7 +10,7 @@
 //  Media items render in order. Each item is ONE of:
 //    { type: 'youtube', id: 'VIDEOID', title?: '...' }
 //    { type: 'loop',    src: 'file', poster?: 'file', title?: '...' }   // silent autoplay loop
-//    { type: 'image',   src: 'file', title?: '...' }                    // static image (e.g. key art)
+//    { type: 'image',   src: 'file', title?: '...', scale?: 0.5 }       // static image (e.g. key art)
 //    { type: 'video',   url: 'https://…/clip.mp4', poster?: 'file', title?: '...' } // hosted video w/ sound
 //
 //  For 'loop'/'image', `src` is the base name WITHOUT extension; the components
@@ -22,7 +22,9 @@
 export type MediaItem =
   | { type: 'youtube'; id: string; title?: string }
   | { type: 'loop'; src: string; poster?: string; title?: string }
-  | { type: 'image'; src: string; title?: string }
+  /** `scale` (0–1) shrinks the displayed width — for low-res sources that look
+   *  soft at full column width. Defaults to 1. */
+  | { type: 'image'; src: string; title?: string; scale?: number }
   | { type: 'video'; url: string; poster?: string; title?: string };
 
 /**
@@ -45,6 +47,7 @@ export type Tag =
   // languages
   | 'C++'
   | 'C#'
+  | 'Python'
   // gameplay
   | 'Gameplay'
   | '3C'
@@ -60,6 +63,10 @@ export type Tag =
   | 'Scene Description'
   | 'Evaluation Engine'
   | 'Pipeline'
+  | 'DCC' // Maya / MotionBuilder / Houdini plug-ins & tools
+  | 'Qt'
+  | 'Rigging'
+  | 'Motion Capture'
   // XR
   | 'AR'
   | 'VR'
@@ -92,7 +99,7 @@ export const projects: Project[] = [
     slug: 'lego-brick-editor',
     title: 'LEGO Brick Editor — Unreal Engine / UEFN',
     role: 'Lead Software Engineer · The LEGO Group',
-    period: '12/2024 – Present',
+    period: '12/2024 – 04/2026',
     link: {
       label: 'Epic Games documentation',
       url: 'https://dev.epicgames.com/documentation/fortnite/lego-brick-editor-in-fortnite',
@@ -150,7 +157,7 @@ export const projects: Project[] = [
     contributions: [
       'Ported the game to Xbox from Windows.',
       'Set up the Epic Online Services subsystem integrated with PlayFab.',
-      'Performance tuning for character spawning, garbage collection, and load times.',
+      'Performance tuning for character spawning, garbage collection, and load times to hit the framerate target on every supported platform.',
     ],
     tags: ['Unreal Engine', 'C++', 'Console', 'Online Services', 'Performance'],
     media: [
@@ -163,7 +170,7 @@ export const projects: Project[] = [
     slug: 'cod-mwiii',
     title: 'Call of Duty: Modern Warfare III',
     role: 'Expert Gameplay Engineer · Sledgehammer Games',
-    period: '12/2021 – 02/2023',
+    period: '12/2021 – 05/2022',
     link: {
       label: 'callofduty.com',
       url: 'https://www.callofduty.com/en/store/games/modernwarfare3',
@@ -171,8 +178,8 @@ export const projects: Project[] = [
     blurb: 'Gameplay and systems work on a flagship Call of Duty title.',
     contributions: [
       'Created a new Point-Of-Interest (POI) system for NPCs.',
+      'Adopted an ECS system for gameplay-system optimization.',
       'Underwater gameplay animation setup.',
-      'Adopted an ECS system for physics-simulation optimization.',
     ],
     tags: ['Proprietary Engine', 'C++', 'Gameplay', 'Animation', 'ECS'],
     media: [{ type: 'image', src: 'key-art', title: 'Call of Duty: Modern Warfare III — key art' }],
@@ -221,15 +228,69 @@ export const projects: Project[] = [
     slug: 'atlas',
     title: 'Atlas — Scene Description System',
     role: 'Senior Software Developer · Wētā FX',
-    period: '08/2013 – 09/2016',
+    period: '08/2013 – 08/2016',
     blurb:
-      'Proprietary scene description format and API library for Wētā Digital, underpinning an Academy Award-winning pipeline.',
+      'Wētā FX’s proprietary scene description and evaluation framework — recognized with a 2024 Academy® Scientific and Technical Award.',
     contributions: [
-      'Developed the proprietary scene description format and API library (Atlas) for Wētā Digital.',
-      'Focused on low-level API design, animation, evaluation system, and real-time rendering for the proprietary scene data.',
+      'The system received a 2024 Academy® Scientific and Technical Award (Technical Achievement).',
+      'Main developer of the project; designed and maintained a binary-compatible API.',
+      'Designed, implemented, and optimized the evaluation framework.',
+      'Kept the C++ and Python APIs well tested and documented.',
     ],
-    tags: ['Scene Description', 'API Design', 'C++', 'Evaluation Engine', 'Animation', 'Pipeline'],
+    tags: ['Scene Description', 'API Design', 'C++', 'Python', 'Evaluation Engine', 'Pipeline'],
     media: [{ type: 'youtube', id: 'e8DUEO_Sr7Y', title: 'Atlas — Wētā Digital scene description' }],
+  },
+  // Earlier career — in-house tools with no public footage, so these lean on a
+  // talk screenshot / the film the tools served (or no media at all, for FBX).
+  {
+    slug: 'block-party-2',
+    title: 'Lucasfilm Block Party 2 — Procedural Rigging',
+    role: 'Main Designer & Developer · Industrial Light & Magic',
+    period: '09/2012 – 06/2013',
+    link: { label: 'SIGGRAPH 2013 talk', url: 'https://dl.acm.org/doi/10.1145/2504459.2504469' },
+    blurb:
+      'Lucasfilm’s in-house, Maya-based procedural rigging system — successor to the original Block Party — letting expert and novice riggers visually build shareable rigs from expertly designed rig pieces.',
+    contributions: [
+      'The system received a 2018 Academy® Scientific and Technical Award (Technical Achievement).',
+      'Main designer and developer, covering the system back end and the front-end UX design and implementation.',
+      'Built with Python, the Maya Python API, Qt, and PyQt.',
+    ],
+    tags: ['Rigging', 'DCC', 'Python', 'Qt', 'UX', 'Pipeline'],
+    // From the SIGGRAPH 2013 talk materials (ui.rep.jpg).
+    media: [{ type: 'image', src: 'bp2-ui', title: 'BlockParty 2 — visual rig-building interface (SIGGRAPH 2013)' }],
+  },
+  {
+    slug: 'framestore-mocap',
+    title: 'Framestore Motion Capture Production Tools',
+    role: 'Motion Capture Pipeline TD · Framestore',
+    period: '09/2010 – 09/2011',
+    link: { label: 'Framestore performance capture', url: 'https://www.framestore.com/performance-capture' },
+    blurb:
+      'The motion capture data pipeline and on-stage production tools for Framestore’s feature-film work, built from scratch.',
+    contributions: [
+      'Built data repository management, an in-house MotionBuilder real-time control panel, and the Vicon mocap processing pipeline.',
+      'All tools and plug-ins cross-platform, written in Python, MEL, C++, and Qt.',
+      'On-set technical support for shows including Gravity and Wrath of the Titans.',
+    ],
+    tags: ['Motion Capture', 'Pipeline', 'DCC', 'Python', 'C++', 'Qt'],
+    // Studio still from Framestore's Gravity case study, like the CoD key art.
+    media: [{ type: 'image', src: 'gravity', title: 'Gravity (2013) — Framestore' }],
+  },
+  {
+    slug: 'autodesk-fbx',
+    title: 'Autodesk FBX — SDK & Plug-ins',
+    role: 'Software Engineer · Autodesk',
+    period: '01/2008 – 08/2010',
+    link: { label: 'autodesk.com/fbx', url: 'https://www.autodesk.com/products/fbx/overview' },
+    blurb:
+      'The industry-standard 3D interchange format and SDK connecting DCC apps and game engines.',
+    contributions: [
+      'Main designer and developer of instancing, tangent-space export, subdivision surfaces, hardware shader (CgFX and HLSL) support, Autodesk Material Library data interpolation, the Unreal Engine 3 FBX importer/exporter, and Single Step Suites interoperability.',
+      'Designed and implemented FBX SDK features and plug-ins, mostly around polygon, material, and scene-graph technology.',
+      'Main contributor to the FBX SDK and plug-in releases from 2009 to 2012.',
+    ],
+    tags: ['C++', 'API Design', 'Pipeline', 'DCC', 'Rendering'],
+    media: [],
   },
 ];
 
