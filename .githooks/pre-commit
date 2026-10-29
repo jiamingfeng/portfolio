@@ -1,0 +1,6 @@
+#!/bin/sh
+# Refresh public/resume.pdf from ResumeBuilder and include it in this commit, so
+# a push always publishes the latest résumé. Enabled per clone with:
+#   git config core.hooksPath .githooks
+node scripts/sync-resume.mjs || exit 1
+git add public/resume.pdf

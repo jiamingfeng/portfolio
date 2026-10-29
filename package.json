@@ -4,11 +4,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/sync-resume.mjs",
     "dev": "astro dev",
+    "prestart": "node scripts/sync-resume.mjs",
     "start": "astro dev",
     "check": "astro check",
+    "prebuild": "node scripts/sync-resume.mjs",
     "build": "astro check && astro build",
     "preview": "astro preview",
+    "sync-resume": "node scripts/sync-resume.mjs",
     "astro": "astro"
   },
   "dependencies": {

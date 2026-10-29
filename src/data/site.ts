@@ -20,7 +20,7 @@ export const contact = {
   // Public credit profiles.
   mobygames: 'https://www.mobygames.com/person/277101/eric-feng/',
   imdb: 'https://www.imdb.com/name/nm3138347/',
-  // resume.pdf is copied into public/ at build time (see scripts / README).
+  // public/resume.pdf — refreshed from ResumeBuilder via `npm run sync-resume`.
   resume: 'resume.pdf',
 };
 
