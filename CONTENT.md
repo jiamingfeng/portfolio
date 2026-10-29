@@ -260,8 +260,11 @@ The résumé is built by the separate **ResumeBuilder** repo (`E:\dev\projects\R
 
 1. Edit `content/eric_feng_2p.md` in ResumeBuilder.
 2. Run `python build_resume.py content/eric_feng_2p.md` there → `output/eric_feng_2p.pdf`.
-3. Copy it over **both** `resume.pdf` (repo root) and `public/resume.pdf` — the served copy
-   is the one in `public/`. The hero and contact "Download résumé" buttons pick it up
+3. That's it locally: `npm run dev` / `npm run build` copy it into `public/resume.pdf`
+   (the served copy) first, and the pre-commit hook re-copies and stages it on every
+   portfolio commit — so your next push publishes the latest résumé. Run
+   `npm run sync-resume` to copy it by hand while the dev server is already running.
+   On a fresh clone, enable the hook once with `git config core.hooksPath .githooks`. The hero and contact "Download résumé" buttons pick it up
    automatically.
 
 That markdown is the source of truth for the site's copy too: keep `timeline` and `skills`

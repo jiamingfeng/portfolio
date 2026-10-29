@@ -27,5 +27,10 @@ Thumbs.db
 /Childish Gambino's Pharos/
 /WETA_XR/
 
+# local symlink to ResumeBuilder's output/eric_feng_2p.pdf — machine-specific
+# absolute target, so never committed. public/resume.pdf (the served copy) is a
+# real file kept current by scripts/sync-resume.mjs — CI can't follow a link.
+/resume.pdf
+
 # stray skill file accidentally dropped here (not part of the site)
 /SKILL.md
