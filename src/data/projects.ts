@@ -8,7 +8,7 @@
 //  See CONTENT.md for the full walkthrough (media conversion, posters, sizzle reels).
 //
 //  Media items render in order. Each item is ONE of:
-//    { type: 'youtube', id: 'VIDEOID', title?: '...' }
+//    { type: 'youtube', id: 'VIDEOID', title?: '...', poster?: 'file' } // poster = local thumbnail
 //    { type: 'loop',    src: 'file', poster?: 'file', title?: '...' }   // silent autoplay loop
 //    { type: 'image',   src: 'file', title?: '...', scale?: 0.5 }       // static image (e.g. key art)
 //    { type: 'video',   url: 'https://…/clip.mp4', poster?: 'file', title?: '...' } // hosted video w/ sound
@@ -20,7 +20,8 @@
 // =============================================================================
 
 export type MediaItem =
-  | { type: 'youtube'; id: string; title?: string }
+  /** `poster` replaces YouTube's thumbnail with a local <poster>.webp. */
+  | { type: 'youtube'; id: string; title?: string; poster?: string }
   | { type: 'loop'; src: string; poster?: string; title?: string }
   /** `scale` (0–1) shrinks the displayed width — for low-res sources that look
    *  soft at full column width. Defaults to 1. */
@@ -111,7 +112,15 @@ export const projects: Project[] = [
       'Code review in git, Perforce/P4V and GitHub pull requests; converts Blueprints to C++ that builds with zero warnings on UE 5.7/5.8.',
     ],
     tags: ['Unreal Engine', 'Rust', 'WebAssembly', 'Editor Tooling', 'UX', 'C++'],
-    media: [],
+    // Screenshots and the timelapse come from the product site
+    // (UEBlueprintViewer/site/public/img); timelapse.gif → loop via convert-media.sh.
+    media: [
+      { type: 'youtube', id: 'ov37C46Kifs', poster: 'video-thumb', title: 'BlueprintReview — overview' },
+      { type: 'image', src: 'viewer', title: 'Viewer — browse a Blueprint’s graphs and components' },
+      { type: 'image', src: 'diff', title: 'Side-by-side diff of two revisions' },
+      { type: 'image', src: 'review', title: 'Code review straight from git difftool' },
+      { type: 'loop', src: 'timelapse', poster: 'timelapse-poster', title: 'Time-lapse through a Blueprint’s history' },
+    ],
   },
   {
     slug: 'lego-brick-editor',

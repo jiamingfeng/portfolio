@@ -28,6 +28,8 @@ Open [`src/data/projects.ts`](src/data/projects.ts) and edit the project's entry
   ```
   The `id` is the part after `watch?v=` in the URL
   (`https://youtube.com/watch?v=`**`ye14LA-FJnY`** → `ye14LA-FJnY`).
+  To use your own thumbnail instead of YouTube's, add `poster: 'video-thumb'` and put
+  `video-thumb.webp` (plus the `.jpg`, 1280×720) in `public/assets/<slug>/`.
 - **Reorder media** — the first item in `media` renders large (featured); the rest
   render in a 2-up grid below. Reorder the array to change what leads.
 

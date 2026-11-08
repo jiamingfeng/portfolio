@@ -1,13 +1,28 @@
 ---
 // Lazy-loading YouTube facade: shows a poster thumbnail and only injects the
 // iframe on click. Keeps first paint fast (no third-party iframe until wanted).
+import { withBase } from '../utils/url';
+
 interface Props {
   id: string;
   title?: string;
+  /** Project slug — locates `poster` under public/assets/<slug>/. */
+  slug?: string;
+  /** Optional local thumbnail (base name, no extension) instead of YouTube's. */
+  poster?: string;
 }
-const { id, title = 'Video' } = Astro.props;
-// maxresdefault falls back to hqdefault via onerror below.
-const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+const { id, title = 'Video', slug, poster } = Astro.props;
+if (poster && !slug) {
+  throw new Error(`YouTubeEmbed: poster "${poster}" for video ${id} needs a slug to locate it`);
+}
+// A local poster is served as its .webp (see CLAUDE.md "Stills are served as
+// WebP"); otherwise maxresdefault falls back to hqdefault via onerror below.
+const thumb = poster
+  ? withBase(`assets/${slug}/${poster}.webp`)
+  : `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+const fallback = poster
+  ? undefined
+  : `this.onerror=null;this.src='https://i.ytimg.com/vi/${id}/hqdefault.jpg'`;
 ---
 
 <div class="yt" data-id={id} data-title={title}>
@@ -19,7 +34,7 @@ const thumb = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
       loading="lazy"
       width="1280"
       height="720"
-      onerror="this.onerror=null;this.src=`https://i.ytimg.com/vi/${this.closest('.yt').dataset.id}/hqdefault.jpg`"
+      onerror={fallback}
     />
     <span class="yt-play" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="34" height="34"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>

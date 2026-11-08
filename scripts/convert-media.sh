@@ -119,4 +119,10 @@ convert "$XR/LocationScouting_02.mp4"  ar-scouting scout-scan       40 16 "crop=
 convert "$XR/Holoplayer.mp4"           holoplayer  holo-align      124 16
 convert "$XR/Holoplayer.mp4"           holoplayer  holo-playback   228 16
 
+# BlueprintReview (personal project). Source is the product site's own GIF in the
+# sibling repo. It's 1981x852 (2.33:1) and VideoLoop crops to 16:9, which would cut
+# the change list off the left — so pad top/bottom in the UI's background colour.
+BPR="../UEBlueprintViewer/site/public/img"
+convert "$BPR/timelapse.gif"           blueprintreview timelapse "" "" "pad=1981:1114:0:131:color=0x1b1b1b"
+
 echo "Done. Outputs in public/assets/*/"

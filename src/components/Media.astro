@@ -15,7 +15,7 @@ interface Props {
 const { item, slug } = Astro.props;
 ---
 
-{item.type === 'youtube' && <YouTubeEmbed id={item.id} title={item.title} />}
+{item.type === 'youtube' && <YouTubeEmbed id={item.id} title={item.title} slug={slug} poster={item.poster} />}
 {item.type === 'loop' && <VideoLoop slug={slug} src={item.src} poster={item.poster} title={item.title} />}
 {item.type === 'image' && <ProjectImage slug={slug} src={item.src} title={item.title} scale={item.scale} />}
 {item.type === 'video' && <VideoEmbed url={item.url} slug={slug} poster={item.poster} title={item.title} />}

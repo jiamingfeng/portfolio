@@ -25,7 +25,7 @@ means editing data, not components.
 
 - [`src/data/projects.ts`](src/data/projects.ts) — the project catalogue. One `Project`
   entry per project; `media[]` holds ordered items, each either
-  `{type:'youtube', id, title}`, `{type:'loop', src, poster, title}`,
+  `{type:'youtube', id, title, poster?}` (optional local thumbnail), `{type:'loop', src, poster, title}`,
   `{type:'image', src, title}` or `{type:'video', url, poster, title}`. First media
   item renders featured (large); rest render in a 2-up grid. Empty `media` → text-only
   card (used for NDA work). **Adding a project = one array entry + optional asset
@@ -183,11 +183,12 @@ top of [`astro.config.mjs`](astro.config.mjs) — currently a project page at
 
 ## Current project set (order)
 
-**Front page (`projects`):** BlueprintReview (personal, text-only) → LEGO Brick Editor →
+**Front page (`projects`):** BlueprintReview (personal) → LEGO Brick Editor →
 Exodus → Towerborne → CoD: MWIII →
 Pharos → Frostbite → Atlas → Block Party 2 (ILM) → Framestore mocap tools → Autodesk FBX
 (Block Party 2 = SIGGRAPH talk UI screenshot, Framestore = Gravity still, FBX = text-only).
-Media: LEGO (`7J7J0zm5xFc` + 4 local loops), Exodus (`ye14LA-FJnY` + 6 local loops),
+Media: BlueprintReview (`ov37C46Kifs` with local `video-thumb` poster + viewer/diff/review
+stills + `timelapse` loop padded from the product site's GIF), LEGO (`7J7J0zm5xFc` + 4 local loops), Exodus (`ye14LA-FJnY` + 6 local loops),
 Towerborne official (`4RhVFeNIBi0`, `YQlDe-tBV4E`, `7bY1Hgia6_I`), Pharos
 (`DTAW0i7NSoo`), Atlas (`e8DUEO_Sr7Y`), CoD (key-art image), Frostbite (hosted EA sizzle).
 
