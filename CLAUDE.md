@@ -132,7 +132,8 @@ conversions re-run without the share mounted).
 builds from git on Ubuntu, where the ResumeBuilder path doesn't exist; in CI the script is a
 no-op. Root `resume.pdf` is just a git-ignored local symlink to the output, for convenience. That markdown is also the **source of truth for
 site copy** — `timeline`/`skills` in `site.ts` and project dates/bullets in `projects.ts`
-mirror it (skill levels map 90 → expert, 80 → advanced, 70 → proficient). The two Wētā XR
+mirror it (skill levels are the résumé's 0–100 numbers verbatim; the bar width is the number
+and `skillLabel()` derives the text: ≥90 expert, ≥80 advanced, else proficient). The two Wētā XR
 projects are site-only; the résumé omits them.
 
 Asset weight is ~105 MB total; GitHub Pages' limits are 100 MB/file (hard) and ~1 GB/repo
@@ -182,7 +183,8 @@ top of [`astro.config.mjs`](astro.config.mjs) — currently a project page at
 
 ## Current project set (order)
 
-**Front page (`projects`):** LEGO Brick Editor → Exodus → Towerborne → CoD: MWIII →
+**Front page (`projects`):** BlueprintReview (personal, text-only) → LEGO Brick Editor →
+Exodus → Towerborne → CoD: MWIII →
 Pharos → Frostbite → Atlas → Block Party 2 (ILM) → Framestore mocap tools → Autodesk FBX
 (Block Party 2 = SIGGRAPH talk UI screenshot, Framestore = Gravity still, FBX = text-only).
 Media: LEGO (`7J7J0zm5xFc` + 4 local loops), Exodus (`ye14LA-FJnY` + 6 local loops),

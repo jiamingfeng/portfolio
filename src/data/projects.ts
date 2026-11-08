@@ -48,6 +48,8 @@ export type Tag =
   | 'C++'
   | 'C#'
   | 'Python'
+  | 'Rust'
+  | 'WebAssembly'
   // gameplay
   | 'Gameplay'
   | '3C'
@@ -95,6 +97,22 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    slug: 'blueprintreview',
+    title: 'BlueprintReview',
+    role: 'Personal project',
+    period: '2026 – Present',
+    link: { label: 'blueprintreview.efenggamedev.com', url: 'https://blueprintreview.efenggamedev.com/' },
+    blurb:
+      'A standalone viewer and diff tool for Unreal Engine Blueprint assets (UE 4.25–5.8), for desktop and the web.',
+    contributions: [
+      'Written in Rust with an egui UI, running on desktop and in the browser (WASM).',
+      'Parses .uasset binaries directly, with no dependency on Unreal Engine.',
+      'Code review in git, Perforce/P4V and GitHub pull requests; converts Blueprints to C++ that builds with zero warnings on UE 5.7/5.8.',
+    ],
+    tags: ['Unreal Engine', 'Rust', 'WebAssembly', 'Editor Tooling', 'UX', 'C++'],
+    media: [],
+  },
   {
     slug: 'lego-brick-editor',
     title: 'LEGO Brick Editor — Unreal Engine / UEFN',
@@ -233,8 +251,8 @@ export const projects: Project[] = [
       'Wētā FX’s proprietary scene description and evaluation framework — recognized with a 2024 Academy® Scientific and Technical Award.',
     contributions: [
       'The system received a 2024 Academy® Scientific and Technical Award (Technical Achievement).',
-      'Main developer of the project; designed and maintained a binary-compatible API.',
-      'Designed, implemented, and optimized the evaluation framework.',
+      'Main developer of the project.',
+      'Designed the binary-compatible API; designed, implemented, and optimized the evaluation framework.',
       'Kept the C++ and Python APIs well tested and documented.',
     ],
     tags: ['Scene Description', 'API Design', 'C++', 'Python', 'Evaluation Engine', 'Pipeline'],
@@ -249,7 +267,7 @@ export const projects: Project[] = [
     period: '09/2012 – 06/2013',
     link: { label: 'SIGGRAPH 2013 talk', url: 'https://dl.acm.org/doi/10.1145/2504459.2504469' },
     blurb:
-      'Lucasfilm’s in-house, Maya-based procedural rigging system — successor to the original Block Party — letting expert and novice riggers visually build shareable rigs from expertly designed rig pieces.',
+      'Lucasfilm’s in-house, Maya-based procedural rigging system: riggers visually build shareable rigs from expertly designed rig pieces.',
     contributions: [
       'The system received a 2018 Academy® Scientific and Technical Award (Technical Achievement).',
       'Main designer and developer, covering the system back end and the front-end UX design and implementation.',
@@ -285,7 +303,7 @@ export const projects: Project[] = [
     blurb:
       'The industry-standard 3D interchange format and SDK connecting DCC apps and game engines.',
     contributions: [
-      'Main designer and developer of instancing, tangent-space export, subdivision surfaces, hardware shader (CgFX and HLSL) support, Autodesk Material Library data interpolation, the Unreal Engine 3 FBX importer/exporter, and Single Step Suites interoperability.',
+      'Main designer and developer of instancing, subdivision surfaces, hardware shader (CgFX/HLSL) support, and the Unreal Engine 3 FBX importer/exporter.',
       'Designed and implemented FBX SDK features and plug-ins, mostly around polygon, material, and scene-graph technology.',
       'Main contributor to the FBX SDK and plug-in releases from 2009 to 2012.',
     ],

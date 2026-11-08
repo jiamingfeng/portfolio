@@ -7,7 +7,7 @@ export const site = {
   pedigree: 'Ex-Activision · Ex-EA · Ex-Wētā FX · Ex-ILM',
   summary:
     'Over 20 years building gameplay, graphics, and engine technology embraced by top-tier game studios, award-winning visual-effects houses, and real-time content platforms.',
-  location: 'Denmark',
+  location: 'Relocating to Melbourne, Australia',
   // Used for <title>, meta description, and Open Graph tags.
   seoDescription:
     'Eric Feng — Principal/Lead game engine & graphics engineer. Unreal Engine specialist. Shipped work on LEGO, Call of Duty, Exodus, Towerborne, Frostbite, and Childish Gambino’s Pharos.',
@@ -15,7 +15,7 @@ export const site = {
 
 export const contact = {
   email: 'eric84720@gmail.com',
-  phone: '+45-60348346',
+  phone: '+61 476781449',
   linkedin: 'https://www.linkedin.com/in/jiamingfeng',
   // Public credit profiles.
   mobygames: 'https://www.mobygames.com/person/277101/eric-feng/',
@@ -28,21 +28,28 @@ export type SkillLevel = 'expert' | 'advanced' | 'proficient';
 
 export interface Skill {
   name: string;
-  level: SkillLevel;
+  /** 0–100, copied from the résumé's skill bars; drives the bar width. */
+  level: number;
 }
 
-// Mirrors the résumé's skill bars (ResumeBuilder content/eric_feng_2p.md):
-// 90 → expert, 80 → advanced, 70 → proficient.
+/** Label shown beside a skill bar: ≥90 expert, ≥80 advanced, else proficient. */
+export function skillLabel(level: number): SkillLevel {
+  return level >= 90 ? 'expert' : level >= 80 ? 'advanced' : 'proficient';
+}
+
+// Mirrors the résumé's skill bars (ResumeBuilder content/eric_feng_2p.md),
+// levels copied as-is.
 export const skills: Skill[] = [
-  { name: 'C / C++', level: 'expert' },
-  { name: 'Unreal Engine', level: 'expert' },
-  { name: 'VR / AR / XR', level: 'expert' },
-  { name: 'AI / Animation / GPU Programming', level: 'advanced' },
-  { name: 'DCC (Maya / Blender / Houdini)', level: 'advanced' },
-  { name: 'Asset Pipeline', level: 'advanced' },
-  { name: 'UX / Qt / ImGui', level: 'proficient' },
-  { name: 'Unity', level: 'proficient' },
-  { name: 'C# / Python', level: 'proficient' },
+  { name: 'C / C++', level: 90 },
+  { name: 'Unreal Engine', level: 90 },
+  { name: 'VR / AR / XR', level: 90 },
+  { name: 'Game AI / Animation / GPU', level: 80 },
+  { name: 'DCC (Maya / Blender / Houdini)', level: 80 },
+  { name: 'Asset Pipeline', level: 80 },
+  { name: 'UX / Qt / ImGui / egui', level: 70 },
+  { name: 'Unity / C#', level: 70 },
+  { name: 'Python / Rust', level: 75 },
+  { name: 'AI-Assisted Dev (LLM agents)', level: 75 },
 ];
 
 export interface TimelineEntry {

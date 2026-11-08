@@ -1,5 +1,5 @@
 ---
-import { site } from '../data/site';
+import { site, skillLabel } from '../data/site';
 import { generalProfile, type Profile } from '../data/profiles';
 import { withBase } from '../utils/url';
 
@@ -9,12 +9,6 @@ interface Props {
 const { profile = generalProfile } = Astro.props;
 const { skills, timeline } = profile;
 
-// Group skill bars; level → fill width.
-const levelWidth: Record<string, string> = {
-  expert: '100%',
-  advanced: '80%',
-  proficient: '62%',
-};
 ---
 
 <section class="section about" id="about">
@@ -58,10 +52,10 @@ const levelWidth: Record<string, string> = {
             <li class="skill">
               <div class="skill-row">
                 <span class="skill-name">{s.name}</span>
-                <span class="skill-level">{s.level}</span>
+                <span class="skill-level">{skillLabel(s.level)}</span>
               </div>
               <div class="skill-bar">
-                <span class="skill-fill" style={`width:${levelWidth[s.level]}`}></span>
+                <span class="skill-fill" style={`width:${s.level}%`}></span>
               </div>
             </li>
           ))}

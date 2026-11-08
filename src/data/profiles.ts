@@ -87,7 +87,7 @@ export const generalProfile: Profile = {
   workTitle: 'Projects',
   aboutTitle: 'Two decades across games, VFX, and real-time graphics',
   contactPitch:
-    'Open to Principal / Lead engineering roles in games, real-time graphics, and engine technology.',
+    'Open to Principal / Lead engineering roles in games, real-time graphics, and engine technology. New Zealand citizen relocating to Melbourne — eligible to work in Australia without sponsorship.',
   skills,
   timeline,
   projects,
@@ -118,15 +118,16 @@ export const xrProfile: Profile = {
   workTitle: 'Selected XR & real-time work',
   aboutTitle: 'Real-time engineering across XR, tooling, and gameplay',
   contactPitch:
-    'Open to Senior XR engineering roles — AR / VR / MR applications, spatial interaction, and creator tooling in Unity or Unreal.',
+    'Open to Senior XR engineering roles — AR / VR / MR applications, spatial interaction, and creator tooling in Unity or Unreal. New Zealand citizen relocating to Melbourne — eligible to work in Australia without sponsorship.',
   skills: orderSkills([
     'VR / AR / XR',
     'Unreal Engine',
     'C / C++',
-    'Unity',
-    'C# / Python',
-    'AI / Animation / GPU Programming',
-    'UX / Qt / ImGui',
+    'Unity / C#',
+    'Game AI / Animation / GPU',
+    'UX / Qt / ImGui / egui',
+    'Python / Rust',
+    'AI-Assisted Dev (LLM agents)',
     'DCC (Maya / Blender / Houdini)',
     'Asset Pipeline',
   ]),
@@ -172,7 +173,7 @@ export const xrProfile: Profile = {
         'Low-level API and real-time rendering for Wētā FX’s Academy Sci-Tech Award-winning scene-description system.',
       contributions: [
         'The system received a 2024 Academy® Scientific and Technical Award (Technical Achievement).',
-        'Main developer: designed and maintained a binary-compatible C++ / Python API.',
+        'Main developer: designed the binary-compatible C++ / Python API.',
         'Designed, implemented, and optimized the evaluation framework behind real-time rendering of scene data.',
       ],
       // Tags inherited from projects.ts — same set on both pages.
