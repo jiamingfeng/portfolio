@@ -183,8 +183,8 @@ top of [`astro.config.mjs`](astro.config.mjs) — currently a project page at
 
 ## Current project set (order)
 
-**Front page (`projects`):** BlueprintReview (personal) → LEGO Brick Editor →
-Exodus → Towerborne → CoD: MWIII →
+**Front page (`projects`):** Exodus → LEGO Brick Editor →
+BlueprintReview (personal) → Towerborne → CoD: MWIII →
 Pharos → Frostbite → Atlas → Block Party 2 (ILM) → Framestore mocap tools → Autodesk FBX
 (Block Party 2 = SIGGRAPH talk UI screenshot, Framestore = Gravity still, FBX = text-only).
 Media: BlueprintReview (`ov37C46Kifs` with local `video-thumb` poster + viewer/diff/review

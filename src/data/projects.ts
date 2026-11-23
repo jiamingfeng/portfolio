@@ -99,27 +99,28 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    slug: 'blueprintreview',
-    title: 'BlueprintReview',
-    role: 'Personal project',
-    period: '2026 – Present',
-    link: { label: 'blueprintreview.efenggamedev.com', url: 'https://blueprintreview.efenggamedev.com/' },
+    slug: 'exodus',
+    title: 'Exodus',
+    role: 'Principal Gameplay Engineer',
+    period: '04/2023 – 12/2024',
+    link: { label: 'exodusgame.com', url: 'https://www.exodusgame.com/' },
     blurb:
-      'A standalone viewer and diff tool for Unreal Engine Blueprint assets (UE 4.25–5.8), for desktop and the web.',
+      'AAA action-RPG — owned player traversal mechanics and gameplay animation systems.',
     contributions: [
-      'Written in Rust with an egui UI, running on desktop and in the browser (WASM).',
-      'Parses .uasset binaries directly, with no dependency on Unreal Engine.',
-      'Code review in git, Perforce/P4V and GitHub pull requests; converts Blueprints to C++ that builds with zero warnings on UE 5.7/5.8.',
+      'Product owner and main contributor for swing, grapple, balance-beam, and camera-transition systems.',
+      'Implemented player traversal gameplay and gameplay animation.',
+      'Ensured systems interoperate with GAS, companion systems, and NPC interactions.',
     ],
-    tags: ['Unreal Engine', 'Rust', 'WebAssembly', 'Editor Tooling', 'UX', 'C++'],
-    // Screenshots and the timelapse come from the product site
-    // (UEBlueprintViewer/site/public/img); timelapse.gif → loop via convert-media.sh.
+    tags: ['Unreal Engine', 'Gameplay', '3C', 'Animation', 'NPC AI', 'GAS', 'C++'],
+    // Full gameplay leads; the loops below isolate the specific systems Eric owned.
     media: [
-      { type: 'youtube', id: 'ov37C46Kifs', poster: 'video-thumb', title: 'BlueprintReview — overview' },
-      { type: 'image', src: 'viewer', title: 'Viewer — browse a Blueprint’s graphs and components' },
-      { type: 'image', src: 'diff', title: 'Side-by-side diff of two revisions' },
-      { type: 'image', src: 'review', title: 'Code review straight from git difftool' },
-      { type: 'loop', src: 'timelapse', poster: 'timelapse-poster', title: 'Time-lapse through a Blueprint’s history' },
+      { type: 'youtube', id: 'ye14LA-FJnY', title: 'Exodus — Gameplay Walkthrough' },
+      { type: 'loop', src: 'swing-grapple', poster: 'swing-grapple-poster', title: 'Swing & grapple system' },
+      { type: 'loop', src: 'railclaw', poster: 'railclaw-poster', title: 'RailClaw traversal' },
+      { type: 'loop', src: 'slope-slide', poster: 'slope-slide-poster', title: 'Balance & slope traversal' },
+      { type: 'loop', src: 'zip-to-cover', poster: 'zip-to-cover-poster', title: 'Camera transition — zip to cover' },
+      { type: 'loop', src: 'npc-traversal', poster: 'npc-traversal-poster', title: 'NPC animation — traversal in motion' },
+      { type: 'loop', src: 'npc-aim', poster: 'npc-aim-poster', title: 'NPC animation — aim & locomotion' },
     ],
   },
   {
@@ -148,28 +149,27 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: 'exodus',
-    title: 'Exodus',
-    role: 'Principal Gameplay Engineer',
-    period: '04/2023 – 12/2024',
-    link: { label: 'exodusgame.com', url: 'https://www.exodusgame.com/' },
+    slug: 'blueprintreview',
+    title: 'BlueprintReview',
+    role: 'Personal project',
+    period: '2026 – Present',
+    link: { label: 'blueprintreview.efenggamedev.com', url: 'https://blueprintreview.efenggamedev.com/' },
     blurb:
-      'AAA action-RPG — owned player traversal mechanics and gameplay animation systems.',
+      'A standalone viewer and diff tool for Unreal Engine Blueprint assets (UE 4.25–5.8), for desktop and the web.',
     contributions: [
-      'Product owner and main contributor for swing, grapple, balance-beam, and camera-transition systems.',
-      'Implemented player traversal gameplay and gameplay animation.',
-      'Ensured systems interoperate with GAS, companion systems, and NPC interactions.',
+      'Written in Rust with an egui UI, running on desktop and in the browser (WASM).',
+      'Parses .uasset binaries directly, with no dependency on Unreal Engine.',
+      'Code review in git, Perforce/P4V and GitHub pull requests; converts Blueprints to C++ that builds with zero warnings on UE 5.7/5.8.',
     ],
-    tags: ['Unreal Engine', 'Gameplay', '3C', 'Animation', 'NPC AI', 'GAS', 'C++'],
-    // Full gameplay leads; the loops below isolate the specific systems Eric owned.
+    tags: ['Unreal Engine', 'Rust', 'WebAssembly', 'Editor Tooling', 'UX', 'C++'],
+    // Screenshots and the timelapse come from the product site
+    // (UEBlueprintViewer/site/public/img); timelapse.gif → loop via convert-media.sh.
     media: [
-      { type: 'youtube', id: 'ye14LA-FJnY', title: 'Exodus — Gameplay Walkthrough' },
-      { type: 'loop', src: 'swing-grapple', poster: 'swing-grapple-poster', title: 'Swing & grapple system' },
-      { type: 'loop', src: 'railclaw', poster: 'railclaw-poster', title: 'RailClaw traversal' },
-      { type: 'loop', src: 'slope-slide', poster: 'slope-slide-poster', title: 'Balance & slope traversal' },
-      { type: 'loop', src: 'zip-to-cover', poster: 'zip-to-cover-poster', title: 'Camera transition — zip to cover' },
-      { type: 'loop', src: 'npc-traversal', poster: 'npc-traversal-poster', title: 'NPC animation — traversal in motion' },
-      { type: 'loop', src: 'npc-aim', poster: 'npc-aim-poster', title: 'NPC animation — aim & locomotion' },
+      { type: 'youtube', id: 'ov37C46Kifs', poster: 'video-thumb', title: 'BlueprintReview — overview' },
+      { type: 'image', src: 'viewer', title: 'Viewer — browse a Blueprint’s graphs and components' },
+      { type: 'image', src: 'diff', title: 'Side-by-side diff of two revisions' },
+      { type: 'image', src: 'review', title: 'Code review straight from git difftool' },
+      { type: 'loop', src: 'timelapse', poster: 'timelapse-poster', title: 'Time-lapse through a Blueprint’s history' },
     ],
   },
   {
